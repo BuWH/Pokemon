@@ -1,5 +1,4 @@
 #include "widget.h"
-#include "creature.h"
 
 Widget::Widget(QWidget *parent)
         : QWidget(parent) {
