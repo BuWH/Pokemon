@@ -6,6 +6,7 @@
 #define POKEMON_BASECREATURE_H
 
 #include <string>
+#include <QString>
 #include "constdefine.h"
 #include <QDebug>
 
@@ -49,8 +50,9 @@ public:
     void setAttackInterval(int interval) { this->attack_interval = interval; };
 
     void addExp(int exp);
-
     void printCreature();
+
+    void printCreature_QT();
 
     int attack();
 
@@ -66,7 +68,7 @@ private:
     int hp;
     float attack_interval;
 
-    void upgrade();
+    virtual void upgrade();
 };
 
 

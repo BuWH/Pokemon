@@ -6,8 +6,8 @@
 AttackerCreatrue::AttackerCreatrue() {
     this->setName("Attacker");
     this->setType(Type::attacker);
-    this->setHp(10);
-    this->setStrength(5);
-    this->setDefense(2);
-    this->setAttackInterval(1);
+    this->setHp(ATTACKER_INIT_HP);
+    this->setStrength(ATTACKER_INIT_STRENGTH);
+    this->setDefense(ATTACKER_INIT_DEFNESE);
+    this->setAttackInterval(ATTACKER_INIT_ATTACK_INTERVAL);
 }

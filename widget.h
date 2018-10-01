@@ -3,6 +3,9 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
 #include "creature.h"
 class Widget : public QWidget {
 Q_OBJECT
