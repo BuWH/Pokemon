@@ -7,7 +7,9 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include "creature.h"
+
 class Widget : public QWidget {
+
 Q_OBJECT
 
 public:
@@ -15,8 +17,13 @@ public:
 
     ~Widget();
 
-private:
+protected:
+    QLabel name, type, level, exp, hp, strength, defense, attack_interval;
+    QPushButton generate;
 
+    void creatureTest();
+
+    void generateCreature();
 };
 
 #endif // WIDGET_H

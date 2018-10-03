@@ -1,7 +1,7 @@
 //
 // Created by 温和 on 2018/10/1.
 //
-#pragma
+#pragma once
 #ifndef POKEMON_CONST_DEFINE_H
 #define POKEMON_CONST_DEFINE_H
 
@@ -55,5 +55,12 @@ enum Type {
 #define ASSASSIN_GROW_DEFNESE 2
 #define ASSASSIN_GROW_ATTACK_INTERVAL 1.0
 
+
+#define TEST_WIDTH 300
+#define TEST_HEIGHT 600
+#define LINE_WIDTH 80
+#define LINE_HEIGHT 20
+#define SIDE_INTERVAL 30
+#define LINE_INTERVAL 10
 
 #endif //POKEMON_CONST_DEFINE_H

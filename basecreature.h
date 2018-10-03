@@ -7,6 +7,7 @@
 
 #include <string>
 #include <QString>
+#include <random>
 #include "constdefine.h"
 #include <QDebug>
 
@@ -21,6 +22,12 @@ public:
     int getExp() { return this->exp; };
 
     int getHp() { return this->hp; };
+
+    float getStrength() { return this->strength; };
+
+    float getDefense() { return this->defense; };
+
+    float getAttackInterval() { return this->attack_interval; };
 
     std::string getType() {
         switch (this->type) {
@@ -43,30 +50,33 @@ public:
 
     void setExp(int exp) { this->exp = exp; };
 
-    void setStrength(int strength) { this->strength = strength; };
+    void setStrength(float strength) { this->strength = strength; };
 
-    void setDefense(int defense) { this->defense = defense; };
+    void setDefense(float defense) { this->defense = defense; };
 
-    void setAttackInterval(int interval) { this->attack_interval = interval; };
+    void setAttackInterval(float interval) { this->attack_interval = interval; };
 
     void addExp(int exp);
+
     void printCreature();
 
     void printCreature_QT();
 
     int attack();
 
-    void defend(int attack);
+    void defend(float attack);
 
+    void initAbility();
 private:
     Type type;
     std::string name;
     int level;
     int exp;
-    int strength;
-    int defense;
+    float strength;
+    float defense;
     int hp;
     float attack_interval;
+
 
     virtual void upgrade();
 };
