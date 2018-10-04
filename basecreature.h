@@ -32,19 +32,21 @@ public:
     std::string getType() {
         switch (this->type) {
             case Type::attacker:
-                return "attacker";
+                return "力士";
             case Type::tanker  :
-                return "tanker";
+                return "坦克";
             case Type::defender:
-                return "defender";
+                return "御者";
             case Type::assassin:
-                return "assassin";
+                return "刺客";
         }
     }
 
     void setType(Type type) { this->type = type; };
 
     void setName(std::string name) { this->name = name; };
+
+    void setLevel(int level) { this->level = level; };
 
     void setHp(int hp) { this->hp = hp; };
 
@@ -66,6 +68,8 @@ public:
 
     void defend(float attack);
 
+    float randomGrow(float attribute);
+
     void initAbility();
 private:
     Type type;
@@ -76,7 +80,6 @@ private:
     float defense;
     int hp;
     float attack_interval;
-
 
     virtual void upgrade();
 };

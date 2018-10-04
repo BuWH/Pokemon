@@ -10,6 +10,8 @@
 class AttackerCreatrue : public BaseCreature {
 public:
     AttackerCreatrue();
+
+    void upgrade();
 };
 
 

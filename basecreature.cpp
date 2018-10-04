@@ -44,12 +44,22 @@ void BaseCreature::addExp(int exp) {
     this->exp += exp;
 }
 
+float BaseCreature::randomGrow(float attribute) {
+    static std::default_random_engine e;
+    static std::normal_distribution<float> n(0, 0.2);
+    float temp = round(n(e) * 10) / 10;
+    if (temp > 0)
+        return temp + attribute;
+    else
+        return attribute;
+}
+
 void BaseCreature::initAbility() {
     static std::default_random_engine e;
     static std::normal_distribution<float> n(0, 0.2);
     switch (this->type) {
         case Type::attacker:
-            this->setHp(ATTACKER_INIT_HP + round(n(e)));
+            this->setHp(ATTACKER_INIT_HP + round(n(e) * 10) / 10);
             this->setStrength(ATTACKER_INIT_STRENGTH + round(n(e) * 10) / 10);
             this->setDefense(ATTACKER_INIT_DEFNESE + round(n(e) * 10) / 10);
             this->setAttackInterval(ATTACKER_INIT_ATTACK_INTERVAL + round(n(e) * 10) / 10);

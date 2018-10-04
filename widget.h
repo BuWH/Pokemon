@@ -19,11 +19,16 @@ public:
 
 protected:
     QLabel name, type, level, exp, hp, strength, defense, attack_interval;
-    QPushButton generate;
+    QPushButton generate, upgrade;
 
+    void refresh();
     void creatureTest();
 
+    void upgradeCreature();
     void generateCreature();
+
+private:
+    AttackerCreatrue *attacker;
 };
 
 #endif // WIDGET_H
