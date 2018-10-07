@@ -27,10 +27,10 @@ Widget::Widget(QWidget *parent)
     defense.setParent(this);
     defense.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 4, LINE_WIDTH, LINE_HEIGHT);
     defense.setText("防: ");
-    attack_interval.setParent(this);
-    attack_interval.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 5, LINE_WIDTH,
+    speed.setParent(this);
+    speed.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 5, LINE_WIDTH,
                                 LINE_HEIGHT);
-    attack_interval.setText("速: ");
+    speed.setText("速: ");
 
     generate.setParent(this);
     generate.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 6,
@@ -81,8 +81,8 @@ void Widget::refresh() {
     temp.append(QString::number(attacker->getDefense()));
     defense.setText(temp);
     temp = "速: ";
-    temp.append(QString::number(attacker->getAttackInterval()));
-    attack_interval.setText(temp);
+    temp.append(QString::number(attacker->getSpeed()));
+    speed.setText(temp);
 }
 
 void Widget::upgradeCreature() {

@@ -27,7 +27,7 @@ public:
 
     float getDefense() { return this->defense; };
 
-    float getAttackInterval() { return this->attack_interval; };
+    float getSpeed() { return this->speed; };
 
     std::string getType() {
         switch (this->type) {
@@ -41,6 +41,12 @@ public:
                 return "刺客";
         }
     }
+
+    void printCreature();
+
+    void printCreature_QT();
+
+protected:
 
     void setType(Type type) { this->type = type; };
 
@@ -56,13 +62,9 @@ public:
 
     void setDefense(float defense) { this->defense = defense; };
 
-    void setAttackInterval(float interval) { this->attack_interval = interval; };
+    void setSpeed(float interval) { this->speed = interval; };
 
     void addExp(int exp);
-
-    void printCreature();
-
-    void printCreature_QT();
 
     int attack();
 
@@ -70,8 +72,10 @@ public:
 
     float randomGrow(float attribute);
 
-    void initAbility();
+    virtual void initAbility();
+
 private:
+
     Type type;
     std::string name;
     int level;
@@ -79,7 +83,7 @@ private:
     float strength;
     float defense;
     int hp;
-    float attack_interval;
+    float speed;
 
     virtual void upgrade();
 };

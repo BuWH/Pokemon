@@ -18,7 +18,7 @@ public:
     ~Widget();
 
 protected:
-    QLabel name, type, level, exp, hp, strength, defense, attack_interval;
+    QLabel name, type, level, exp, hp, strength, defense, speed;
     QPushButton generate, upgrade;
 
     void refresh();
