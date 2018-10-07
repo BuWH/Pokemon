@@ -1,53 +1,20 @@
 #include "widget.h"
+#include "ui_widget.h"
+
 
 Widget::Widget(QWidget *parent)
-        : QWidget(parent) {
+        : QWidget(parent),
+          ui(new Ui::Widget) {
+    ui->setupUi(this);
     //测试程序
     //this->creatureTest();
-    setWindowTitle("Pokemon Test");
-    this->setFixedSize(TEST_WIDTH, TEST_HEIGHT);
-    name.setParent(this);
-    name.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 - (LINE_INTERVAL + LINE_HEIGHT) * 2, LINE_WIDTH, LINE_HEIGHT);
-    name.setText("名: ");
-    type.setParent(this);
-    type.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 - (LINE_INTERVAL + LINE_HEIGHT), LINE_WIDTH, LINE_HEIGHT);
-    type.setText("类: ");
-    level.setParent(this);
-    level.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2, LINE_WIDTH, LINE_HEIGHT);
-    level.setText("级: ");
-    exp.setParent(this);
-    exp.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 1, LINE_WIDTH, LINE_HEIGHT);
-    exp.setText("Ex: ");
-    hp.setParent(this);
-    hp.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 2, LINE_WIDTH, LINE_HEIGHT);
-    hp.setText("体: ");
-    strength.setParent(this);
-    strength.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 3, LINE_WIDTH, LINE_HEIGHT);
-    strength.setText("力: ");
-    defense.setParent(this);
-    defense.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 4, LINE_WIDTH, LINE_HEIGHT);
-    defense.setText("防: ");
-    speed.setParent(this);
-    speed.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 5, LINE_WIDTH,
-                                LINE_HEIGHT);
-    speed.setText("速: ");
+    connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
+    connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
 
-    generate.setParent(this);
-    generate.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 6,
-                         TEST_WIDTH - SIDE_INTERVAL * 2, 45);
-    generate.setText("寻找");
-    connect(&generate, &QPushButton::clicked, this, &Widget::generateCreature);
-
-    upgrade.setParent(this);
-    upgrade.setGeometry(SIDE_INTERVAL, TEST_HEIGHT / 2 + (LINE_INTERVAL + LINE_HEIGHT) * 7 + LINE_HEIGHT,
-                        TEST_WIDTH - SIDE_INTERVAL * 2, 45);
-    upgrade.setText("升级");
-    upgrade.setDisabled(TRUE);
-    connect(&upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
 }
 
 Widget::~Widget() {
-
+    delete ui;
 }
 
 void Widget::creatureTest() {
@@ -59,30 +26,32 @@ void Widget::creatureTest() {
 }
 
 void Widget::refresh() {
+
     QString temp = "名: ";
-    temp.append(QString::fromStdString(attacker->getName()));
-    name.setText(temp);
+    temp.append(attacker->getName());
+    ui->name->setText(temp);
     temp = "类: ";
-    temp.append(QString::fromStdString(attacker->getType()));
-    type.setText(temp);
+    temp.append(attacker->getType());
+    ui->type->setText(temp);
+
     temp = "级: ";
     temp.append(QString::number(attacker->getLevel()));
-    level.setText(temp);
+    ui->level->setText(temp);
     temp = "Ex: ";
     temp.append(QString::number(attacker->getExp()));
-    exp.setText(temp);
+    ui->exp->setText(temp);
     temp = "体: ";
     temp.append(QString::number(attacker->getHp()));
-    hp.setText(temp);
+    ui->hp->setText(temp);
     temp = "力: ";
     temp.append(QString::number(attacker->getStrength()));
-    strength.setText(temp);
+    ui->strength->setText(temp);
     temp = "防: ";
     temp.append(QString::number(attacker->getDefense()));
-    defense.setText(temp);
+    ui->defense->setText(temp);
     temp = "速: ";
     temp.append(QString::number(attacker->getSpeed()));
-    speed.setText(temp);
+    ui->speed->setText(temp);
 }
 
 void Widget::upgradeCreature() {
@@ -93,6 +62,6 @@ void Widget::upgradeCreature() {
 void Widget::generateCreature() {
     delete (attacker);
     attacker = new AttackerCreatrue;
-    upgrade.setDisabled(FALSE);
+    ui->upgrade->setDisabled(FALSE);
     this->refresh();
 }

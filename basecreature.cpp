@@ -12,8 +12,8 @@ BaseCreature::BaseCreature() {
 }
 
 void BaseCreature::printCreature_QT() {
-    qDebug() << "Name: " << QString::fromStdString(this->name) << "   Type: "
-             << QString::fromStdString(this->getType());
+    qDebug() << "Name: " << this->name << "   Type: "
+             << this->getType();
     qDebug() << "Lv: " << this->level << "  Exp: " << this->exp;
     qDebug() << "H : " << this->hp << "  S  : " << this->strength
              << "  D: " << this->defense << "  T: " << this->speed;

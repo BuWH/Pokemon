@@ -15,7 +15,7 @@ class BaseCreature {
 public:
     BaseCreature();
 
-    std::string getName() { return this->name; };
+    QString getName() { return this->name; };
 
     int getLevel() { return this->level; };
 
@@ -29,7 +29,7 @@ public:
 
     float getSpeed() { return this->speed; };
 
-    std::string getType() {
+    QString getType() {
         switch (this->type) {
             case Type::attacker:
                 return "力士";
@@ -50,7 +50,7 @@ protected:
 
     void setType(Type type) { this->type = type; };
 
-    void setName(std::string name) { this->name = name; };
+    void setName(QString name) { this->name = name; };
 
     void setLevel(int level) { this->level = level; };
 
@@ -77,7 +77,7 @@ protected:
 private:
 
     Type type;
-    std::string name;
+    QString name;
     int level;
     int exp;
     float strength;
