@@ -10,7 +10,6 @@ Widget::Widget(QWidget *parent)
     //this->creatureTest();
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
-
 }
 
 Widget::~Widget() {

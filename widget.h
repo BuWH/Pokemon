@@ -7,6 +7,9 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include "attacker.h"
+#include "tanker.h"
+#include "defender.h"
+#include "assassin.h"
 
 namespace Ui {
     class Widget;
@@ -22,8 +25,6 @@ public:
     ~Widget();
 
 protected:
-    //QLabel name, type, level, exp, hp, strength, defense, speed;
-    //QPushButton generate, upgrade;
 
     void refresh();
     void creatureTest();

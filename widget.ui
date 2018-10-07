@@ -194,6 +194,19 @@
                 <string>防:</string>
             </property>
         </widget>
+        <widget class="QLabel" name="creaturePortrait">
+            <property name="geometry">
+                <rect>
+                    <x>50</x>
+                    <y>30</y>
+                    <width>200</width>
+                    <height>200</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>图片占位</string>
+            </property>
+        </widget>
     </widget>
     <layoutdefault spacing="6" margin="11"/>
     <resources/>

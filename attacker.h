@@ -19,16 +19,5 @@ protected:
     void initAbility();
 };
 
-class TankerCreatrue : public BaseCreature {
-public:
-
-    TankerCreatrue();
-
-    void upgrade();
-
-protected:
-
-    void initAbility();
-};
 
 #endif //POKEMON_ATTACKER_H

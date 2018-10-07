@@ -13,6 +13,7 @@
 
 class BaseCreature {
 public:
+
     BaseCreature();
 
     QString getName() { return this->name; };
