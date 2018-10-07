@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtNetwork>
 #include <QDebug>
+#include <QDateTime>
 
 namespace Ui {
     class Widget;
@@ -21,6 +22,7 @@ private:
     Ui::Widget *ui;
     QTcpServer *server;
     QTcpSocket *clientConnection;
+
 
 private slots:
 

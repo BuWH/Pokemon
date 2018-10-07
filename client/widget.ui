@@ -13,17 +13,27 @@
         <property name="windowTitle">
             <string>Widget</string>
         </property>
-        <widget class="QLabel" name="label">
+        <widget class="QLineEdit" name="inputText">
             <property name="geometry">
                 <rect>
-                    <x>50</x>
+                    <x>40</x>
                     <y>40</y>
-                    <width>261</width>
-                    <height>111</height>
+                    <width>251</width>
+                    <height>51</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QPushButton" name="sendText">
+            <property name="geometry">
+                <rect>
+                    <x>40</x>
+                    <y>120</y>
+                    <width>114</width>
+                    <height>32</height>
                 </rect>
             </property>
             <property name="text">
-                <string>test</string>
+                <string>发送</string>
             </property>
         </widget>
     </widget>

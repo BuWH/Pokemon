@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QtNetwork>
+#include <QLineEdit>
+#include <QPushButton>
+#include <string>
 
 namespace Ui {
     class Widget;
@@ -19,6 +22,8 @@ public:
 private:
     Ui::Widget *ui;
     QTcpSocket *client;
+
+    void sendText();
 };
 
 #endif // WIDGET_H
