@@ -17,7 +17,6 @@ enum Type {
 
 #define LEVEL_TOP 15
 
-
 #define ATTACKER_INIT_HP 20
 #define ATTACKER_INIT_STRENGTH 5
 #define ATTACKER_INIT_DEFNESE 2

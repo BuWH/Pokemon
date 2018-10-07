@@ -6,7 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include "creature.h"
+#include "attacker.h"
 
 class Widget : public QWidget {
 
@@ -29,6 +29,7 @@ protected:
 
 private:
     AttackerCreatrue *attacker;
+    TankerCreatrue *tanker;
 };
 
 #endif // WIDGET_H
