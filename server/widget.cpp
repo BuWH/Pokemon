@@ -74,6 +74,7 @@ void Widget::login(QString account, QString password) {
         qDebug() << "send: database open error";
         clientConnection->write("server error");
         clientConnection->waitForBytesWritten();
+        return;
     }
     QTextStream data(&database);
     QString temp, temp1, temp2;

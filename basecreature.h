@@ -12,9 +12,12 @@
 #include <QDebug>
 
 class BaseCreature {
+
 public:
 
     BaseCreature();
+
+    void setName(QString name) { this->name = name; };
 
     QString getName() { return this->name; };
 
@@ -50,8 +53,6 @@ public:
 protected:
 
     void setType(Type type) { this->type = type; };
-
-    void setName(QString name) { this->name = name; };
 
     void setLevel(int level) { this->level = level; };
 
