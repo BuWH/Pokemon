@@ -32,7 +32,6 @@ void Widget::refresh() {
     temp = "类: ";
     temp.append(attacker->getType());
     ui->type->setText(temp);
-
     temp = "级: ";
     temp.append(QString::number(attacker->getLevel()));
     ui->level->setText(temp);

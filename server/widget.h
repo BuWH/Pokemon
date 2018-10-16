@@ -1,10 +1,15 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "const_define.h"
 #include <QWidget>
 #include <QtNetwork>
 #include <QDebug>
 #include <QDateTime>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QByteArray>
 
 namespace Ui {
     class Widget;
@@ -23,6 +28,13 @@ private:
     QTcpServer *server;
     QTcpSocket *clientConnection;
 
+    void processRequest(QString str);
+
+    int accountExist(QString str);
+
+    void signup(QString account, QString password);
+
+    void login(QString account, QString password);
 
 private slots:
 

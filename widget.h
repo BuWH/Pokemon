@@ -6,10 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include "attacker.h"
-#include "tanker.h"
-#include "defender.h"
-#include "assassin.h"
+#include "user.h"
 
 namespace Ui {
     class Widget;

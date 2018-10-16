@@ -16,6 +16,8 @@ enum Type {
 };
 
 #define LEVEL_TOP 15
+#define CREATURE_TYPES 4;
+
 
 #define ATTACKER_INIT_HP 20
 #define ATTACKER_INIT_STRENGTH 5
