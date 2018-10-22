@@ -13,26 +13,29 @@
 
 #include <QVector>
 
-typedef struct creature {
-    Type type;
-    AttackerCreatrue *attacker;
-    DefenderCreatrue *defender;
-    TankerCreatrue *tanker;
-    AssassinCreatrue *assassin;
-} *Creatrue;
-
 class User {
 public:
     User();
 
+public slots:
+
+    void setName(QString name) { this->name = name; };
 private:
     QString name;
 
-    float getWinRate();
+    //float getWinRate();
 
-    QVector creatrues<Creatrue>;
+    QVector<BaseCreature *> creatures;
 
-    Creatrue getRandomCreature();
+    int getCreaturesNum() { return this->creatures.size(); };
+
+    BaseCreature *getRandomCreature();
+
+private slots:
+
+    void addCreature();
+
+    void addCreature(BaseCreature *&creature);
 };
 
 #endif //POKEMON_USER_H

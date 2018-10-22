@@ -24,6 +24,6 @@ void DefenderCreatrue::initAbility() {
     static std::normal_distribution<float> n(0, 0.2);
     this->setHp(DEFENDER_INIT_HP + round(n(e)));
     this->setStrength(DEFENDER_INIT_STRENGTH + round(n(e) * 10) / 10);
-    this->setDefense(DEFENDER_INIT_DEFNESE + round(n(e) * 10) / 10);
+    this->setDefense(DEFENDER_INIT_DEFENSE + round(n(e) * 10) / 10);
     this->setSpeed(DEFENDER_INIT_SPEED + round(n(e) * 10) / 10);
 }

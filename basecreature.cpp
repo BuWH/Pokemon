@@ -4,10 +4,11 @@
 #include "basecreature.h"
 
 BaseCreature::BaseCreature() {
-    type = Type::attacker;
-    name = "base";
-    level = 1;
-    exp = 0;
+    this->type = Type::attacker;
+    this->name = "base";
+    this->id++;
+    this->level = 1;
+    this->exp = 0;
     this->initAbility();
 }
 

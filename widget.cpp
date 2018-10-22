@@ -29,6 +29,9 @@ void Widget::refresh() {
     QString temp = "名: ";
     temp.append(attacker->getName());
     ui->name->setText(temp);
+    temp = "编: ";
+    temp.append(QString::number(attacker->getID()));
+    ui->id->setText(temp);
     temp = "类: ";
     temp.append(attacker->getType());
     ui->type->setText(temp);

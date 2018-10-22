@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>Login</class>
+    <widget class="QWidget" name="Login">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>300</width>
+                <height>600</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Widget</string>
+        </property>
+        <widget class="QLineEdit" name="accountInput">
+            <property name="geometry">
+                <rect>
+                    <x>50</x>
+                    <y>220</y>
+                    <width>200</width>
+                    <height>30</height>
+                </rect>
+            </property>
+            <property name="dragEnabled">
+                <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+                <string>账号...</string>
+            </property>
+            <property name="clearButtonEnabled">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QPushButton" name="login">
+            <property name="geometry">
+                <rect>
+                    <x>45</x>
+                    <y>380</y>
+                    <width>210</width>
+                    <height>50</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>登录</string>
+            </property>
+        </widget>
+        <widget class="QLineEdit" name="passwordInput">
+            <property name="geometry">
+                <rect>
+                    <x>50</x>
+                    <y>260</y>
+                    <width>200</width>
+                    <height>30</height>
+                </rect>
+            </property>
+            <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+            </property>
+            <property name="placeholderText">
+                <string>密码...</string>
+            </property>
+            <property name="clearButtonEnabled">
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget class="QPushButton" name="signup">
+            <property name="geometry">
+                <rect>
+                    <x>45</x>
+                    <y>440</y>
+                    <width>210</width>
+                    <height>50</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>注册</string>
+            </property>
+        </widget>
+    </widget>
+    <layoutdefault spacing="6" margin="11"/>
+    <resources/>
+    <connections/>
+</ui>

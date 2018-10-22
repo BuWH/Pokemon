@@ -27,6 +27,8 @@ public:
 
     int getHp() { return this->hp; };
 
+    int getID() { return this->id; };
+
     float getStrength() { return this->strength; };
 
     float getDefense() { return this->defense; };
@@ -82,6 +84,7 @@ private:
     QString name;
     int level;
     int exp;
+    int id;
     float strength;
     float defense;
     int hp;
