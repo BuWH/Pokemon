@@ -22,17 +22,18 @@ public:
     ~Widget();
 
 protected:
-
     void refresh();
-    void creatureTest();
 
     void upgradeCreature();
     void generateCreature();
 
+    void clearUser();
+
 private:
     Ui::Widget *ui;
-    AttackerCreatrue *attacker;
-    TankerCreatrue *tanker;
+    BaseCreature *currentCreature;
+    User *user;
+
 };
 
 #endif // WIDGET_H

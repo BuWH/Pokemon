@@ -9,13 +9,9 @@
 
 class DefenderCreatrue : public BaseCreature {
 public:
-
     DefenderCreatrue();
-
     void upgrade();
-
 protected:
-
     void initAbility();
 };
 

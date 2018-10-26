@@ -17,9 +17,20 @@ class User {
 public:
     User();
 
+    BaseCreature *getCreature(int i);
+
+    int getCreaturesNum() { return this->creatures.size(); };
+
+    QString getName() { return this->name; };
+
 public slots:
 
     void setName(QString name) { this->name = name; };
+
+    void addCreature();
+
+    void addCreature(BaseCreature *&creature);
+
 private:
     QString name;
 
@@ -27,15 +38,8 @@ private:
 
     QVector<BaseCreature *> creatures;
 
-    int getCreaturesNum() { return this->creatures.size(); };
-
     BaseCreature *getRandomCreature();
 
-private slots:
-
-    void addCreature();
-
-    void addCreature(BaseCreature *&creature);
 };
 
 #endif //POKEMON_USER_H

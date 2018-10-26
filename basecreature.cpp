@@ -6,7 +6,8 @@
 BaseCreature::BaseCreature() {
     this->type = Type::attacker;
     this->name = "base";
-    this->id++;
+    id++;
+    this->creature_id = id;
     this->level = 1;
     this->exp = 0;
     this->initAbility();

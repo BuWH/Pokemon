@@ -14,7 +14,8 @@
 class BaseCreature {
 
 public:
-
+    static int id;
+    
     BaseCreature();
 
     void setName(QString name) { this->name = name; };
@@ -27,7 +28,7 @@ public:
 
     int getHp() { return this->hp; };
 
-    int getID() { return this->id; };
+    int getID() { return this->creature_id; };
 
     float getStrength() { return this->strength; };
 
@@ -51,6 +52,8 @@ public:
     void printCreature();
 
     void printCreature_QT();
+
+    virtual void upgrade();
 
 protected:
 
@@ -84,13 +87,12 @@ private:
     QString name;
     int level;
     int exp;
-    int id;
+
+    int creature_id;
     float strength;
     float defense;
     int hp;
     float speed;
-
-    virtual void upgrade();
 };
 
 

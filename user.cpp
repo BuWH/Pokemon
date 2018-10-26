@@ -5,6 +5,10 @@
 #include <random>
 #include <time.h>
 
+User::User() {
+    this->name = "wenhe";
+}
+
 BaseCreature *User::getRandomCreature() {
     static std::default_random_engine e;
     static std::uniform_int_distribution<int> dis(0, 3);
@@ -13,26 +17,22 @@ BaseCreature *User::getRandomCreature() {
         case Type::attacker: {
             AttackerCreatrue *tempAttacker = new AttackerCreatrue;
             creature = tempAttacker;
-            delete tempAttacker;
             break;
         }
         case Type::defender: {
             DefenderCreatrue *tempDefender = new DefenderCreatrue;
             creature = tempDefender;
-            delete tempDefender;
             break;
         }
 
         case Type::tanker: {
             TankerCreatrue *tempTanker = new TankerCreatrue;
             creature = tempTanker;
-            delete tempTanker;
             break;
         }
         case Type::assassin: {
             AssassinCreatrue *tempAssassin = new AssassinCreatrue;
             creature = tempAssassin;
-            delete tempAssassin;
             break;
         }
     }
@@ -45,4 +45,12 @@ void User::addCreature() {
 
 void User::addCreature(BaseCreature *&creature) {
     this->creatures.append(creature);
+}
+
+BaseCreature *User::getCreature(int i) {
+    if (i > this->creatures.size()) {
+        return NULL;
+    } else {
+        return creatures[i];
+    }
 }
