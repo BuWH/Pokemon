@@ -6,6 +6,8 @@ Widget::Widget(QWidget *parent)
         : QWidget(parent),
           ui(new Ui::Widget) {
     ui->setupUi(this);
+    test = new SingleCreature(this);
+    test->show();
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);

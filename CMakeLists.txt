@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC on)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets Network REQUIRED)
 
-set(SOURCE_FILES main.cpp widget.cpp widget.h attacker.h basecreature.h attacker.cpp constdefine.h basecreature.cpp tanker.h widget.ui tanker.cpp defender.h defender.cpp assassin.cpp assassin.h user.h user.cpp)
+set(SOURCE_FILES main.cpp widget.cpp widget.h attacker.h basecreature.h attacker.cpp constdefine.h basecreature.cpp tanker.h tanker.cpp defender.h defender.cpp assassin.cpp assassin.h user.h user.cpp ui_widget.h singlecreature.cpp singlecreature.h ui_singlecreature.h)
 add_executable(Pokemon ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Network)

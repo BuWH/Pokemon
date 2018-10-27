@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include "user.h"
+#include "singlecreature.h"
 
 namespace Ui {
     class Widget;
@@ -31,9 +32,9 @@ protected:
 
 private:
     Ui::Widget *ui;
+    SingleCreature *test;
     BaseCreature *currentCreature;
     User *user;
-
 };
 
 #endif // WIDGET_H
