@@ -6,8 +6,8 @@
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>200</width>
-                <height>200</height>
+                <width>216</width>
+                <height>372</height>
             </rect>
         </property>
         <property name="windowTitle">
@@ -19,17 +19,130 @@
                 }
             </string>
         </property>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="levelFixed">
             <property name="geometry">
                 <rect>
-                    <x>30</x>
+                    <x>10</x>
                     <y>30</y>
-                    <width>59</width>
+                    <width>16</width>
                     <height>16</height>
                 </rect>
             </property>
             <property name="text">
-                <string>test</string>
+                <string>级:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="expFixed">
+            <property name="geometry">
+                <rect>
+                    <x>90</x>
+                    <y>30</y>
+                    <width>21</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Ex:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="hpFixed">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>50</y>
+                    <width>16</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>体:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="strengthFixed">
+            <property name="geometry">
+                <rect>
+                    <x>90</x>
+                    <y>50</y>
+                    <width>16</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>力:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="defenseFixed">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>70</y>
+                    <width>16</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>防:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="speedFixed">
+            <property name="geometry">
+                <rect>
+                    <x>90</x>
+                    <y>70</y>
+                    <width>16</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>速:</string>
+            </property>
+        </widget>
+        <widget class="QWidget" name="horizontalLayoutWidget">
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>130</y>
+                    <width>151</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="sizeConstraint">
+                    <enum>QLayout::SetNoConstraint</enum>
+                </property>
+                <item>
+                    <widget class="QLabel" name="nameFixed">
+                        <property name="text">
+                            <string>名:</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QLabel" name="name">
+                        <property name="sizePolicy">
+                            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="text">
+                            <string>test</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QLabel" name="typeFixed">
+            <property name="geometry">
+                <rect>
+                    <x>90</x>
+                    <y>0</y>
+                    <width>90</width>
+                    <height>29</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>类:</string>
             </property>
         </widget>
     </widget>

@@ -7,6 +7,8 @@ Widget::Widget(QWidget *parent)
           ui(new Ui::Widget) {
     ui->setupUi(this);
     test = new SingleCreature(this);
+    test->setGeometry(0, 0, 200, 200);
+    //test->raise();
     test->show();
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
