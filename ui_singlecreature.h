@@ -13,75 +13,206 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_SingleCreature {
 public:
-    QLabel *levelFixed;
-    QLabel *expFixed;
-    QLabel *hpFixed;
-    QLabel *strengthFixed;
-    QLabel *defenseFixed;
-    QLabel *speedFixed;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *horizontalLayout;
-    QLabel *nameFixed;
+    QWidget *verticalWidget;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *Layout_name_type;
     QLabel *name;
-    QLabel *typeFixed;
+    QLabel *type;
+    QHBoxLayout *Layout_level_exp;
+    QLabel *levelFixed;
+    QLabel *level;
+    QLabel *expFixed;
+    QLabel *exp;
+    QHBoxLayout *Layout_hp_strength;
+    QLabel *hpFixed;
+    QLabel *hp;
+    QLabel *strengthFixed;
+    QLabel *strength;
+    QHBoxLayout *Layout_defense_speed;
+    QLabel *defenseFixed;
+    QLabel *defense;
+    QLabel *speedFixed;
+    QLabel *speed;
 
     void setupUi(QWidget *SingleCreature) {
         if (SingleCreature->objectName().isEmpty())
             SingleCreature->setObjectName(QStringLiteral("SingleCreature"));
-        SingleCreature->resize(216, 372);
+        SingleCreature->resize(200, 120);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(SingleCreature->sizePolicy().hasHeightForWidth());
+        SingleCreature->setSizePolicy(sizePolicy);
+        SingleCreature->setMinimumSize(QSize(200, 120));
         SingleCreature->setStyleSheet(QLatin1String("QWidget{\n"
                                                     "                background-color: yellow;\n"
                                                     "                }\n"
                                                     "            "));
-        levelFixed = new QLabel(SingleCreature);
-        levelFixed->setObjectName(QStringLiteral("levelFixed"));
-        levelFixed->setGeometry(QRect(10, 30, 16, 16));
-        expFixed = new QLabel(SingleCreature);
-        expFixed->setObjectName(QStringLiteral("expFixed"));
-        expFixed->setGeometry(QRect(90, 30, 21, 16));
-        hpFixed = new QLabel(SingleCreature);
-        hpFixed->setObjectName(QStringLiteral("hpFixed"));
-        hpFixed->setGeometry(QRect(10, 50, 16, 16));
-        strengthFixed = new QLabel(SingleCreature);
-        strengthFixed->setObjectName(QStringLiteral("strengthFixed"));
-        strengthFixed->setGeometry(QRect(90, 50, 16, 16));
-        defenseFixed = new QLabel(SingleCreature);
-        defenseFixed->setObjectName(QStringLiteral("defenseFixed"));
-        defenseFixed->setGeometry(QRect(10, 70, 16, 16));
-        speedFixed = new QLabel(SingleCreature);
-        speedFixed->setObjectName(QStringLiteral("speedFixed"));
-        speedFixed->setGeometry(QRect(90, 70, 16, 16));
-        horizontalLayoutWidget = new QWidget(SingleCreature);
-        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 130, 151, 31));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setSizeConstraint(QLayout::SetNoConstraint);
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        nameFixed = new QLabel(horizontalLayoutWidget);
-        nameFixed->setObjectName(QStringLiteral("nameFixed"));
-
-        horizontalLayout->addWidget(nameFixed);
-
-        name = new QLabel(horizontalLayoutWidget);
+        verticalWidget = new QWidget(SingleCreature);
+        verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
+        verticalWidget->setGeometry(QRect(0, 0, 200, 120));
+        verticalLayout = new QVBoxLayout(verticalWidget);
+        verticalLayout->setSpacing(0);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
+        Layout_name_type = new QHBoxLayout();
+        Layout_name_type->setObjectName(QStringLiteral("Layout_name_type"));
+        Layout_name_type->setSizeConstraint(QLayout::SetNoConstraint);
+        name = new QLabel(verticalWidget);
         name->setObjectName(QStringLiteral("name"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(name->sizePolicy().hasHeightForWidth());
-        name->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(name->sizePolicy().hasHeightForWidth());
+        name->setSizePolicy(sizePolicy1);
+        name->setMinimumSize(QSize(50, 30));
 
-        horizontalLayout->addWidget(name);
+        Layout_name_type->addWidget(name);
 
-        typeFixed = new QLabel(SingleCreature);
-        typeFixed->setObjectName(QStringLiteral("typeFixed"));
-        typeFixed->setGeometry(QRect(90, 0, 90, 29));
+        type = new QLabel(verticalWidget);
+        type->setObjectName(QStringLiteral("type"));
+        sizePolicy1.setHeightForWidth(type->sizePolicy().hasHeightForWidth());
+        type->setSizePolicy(sizePolicy1);
+        type->setMinimumSize(QSize(50, 30));
+
+        Layout_name_type->addWidget(type);
+
+
+        verticalLayout->addLayout(Layout_name_type);
+
+        Layout_level_exp = new QHBoxLayout();
+        Layout_level_exp->setObjectName(QStringLiteral("Layout_level_exp"));
+        Layout_level_exp->setSizeConstraint(QLayout::SetNoConstraint);
+        levelFixed = new QLabel(verticalWidget);
+        levelFixed->setObjectName(QStringLiteral("levelFixed"));
+        sizePolicy1.setHeightForWidth(levelFixed->sizePolicy().hasHeightForWidth());
+        levelFixed->setSizePolicy(sizePolicy1);
+        levelFixed->setMinimumSize(QSize(0, 30));
+        levelFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_level_exp->addWidget(levelFixed);
+
+        level = new QLabel(verticalWidget);
+        level->setObjectName(QStringLiteral("level"));
+        sizePolicy1.setHeightForWidth(level->sizePolicy().hasHeightForWidth());
+        level->setSizePolicy(sizePolicy1);
+        level->setMinimumSize(QSize(50, 30));
+
+        Layout_level_exp->addWidget(level);
+
+        expFixed = new QLabel(verticalWidget);
+        expFixed->setObjectName(QStringLiteral("expFixed"));
+        expFixed->setEnabled(true);
+        sizePolicy1.setHeightForWidth(expFixed->sizePolicy().hasHeightForWidth());
+        expFixed->setSizePolicy(sizePolicy1);
+        expFixed->setMinimumSize(QSize(0, 30));
+        expFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_level_exp->addWidget(expFixed);
+
+        exp = new QLabel(verticalWidget);
+        exp->setObjectName(QStringLiteral("exp"));
+        sizePolicy1.setHeightForWidth(exp->sizePolicy().hasHeightForWidth());
+        exp->setSizePolicy(sizePolicy1);
+        exp->setMinimumSize(QSize(50, 30));
+
+        Layout_level_exp->addWidget(exp);
+
+
+        verticalLayout->addLayout(Layout_level_exp);
+
+        Layout_hp_strength = new QHBoxLayout();
+        Layout_hp_strength->setObjectName(QStringLiteral("Layout_hp_strength"));
+        Layout_hp_strength->setSizeConstraint(QLayout::SetNoConstraint);
+        hpFixed = new QLabel(verticalWidget);
+        hpFixed->setObjectName(QStringLiteral("hpFixed"));
+        sizePolicy1.setHeightForWidth(hpFixed->sizePolicy().hasHeightForWidth());
+        hpFixed->setSizePolicy(sizePolicy1);
+        hpFixed->setMinimumSize(QSize(0, 30));
+        hpFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_hp_strength->addWidget(hpFixed);
+
+        hp = new QLabel(verticalWidget);
+        hp->setObjectName(QStringLiteral("hp"));
+        sizePolicy1.setHeightForWidth(hp->sizePolicy().hasHeightForWidth());
+        hp->setSizePolicy(sizePolicy1);
+        hp->setMinimumSize(QSize(50, 30));
+
+        Layout_hp_strength->addWidget(hp);
+
+        strengthFixed = new QLabel(verticalWidget);
+        strengthFixed->setObjectName(QStringLiteral("strengthFixed"));
+        sizePolicy1.setHeightForWidth(strengthFixed->sizePolicy().hasHeightForWidth());
+        strengthFixed->setSizePolicy(sizePolicy1);
+        strengthFixed->setMinimumSize(QSize(0, 30));
+        strengthFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_hp_strength->addWidget(strengthFixed);
+
+        strength = new QLabel(verticalWidget);
+        strength->setObjectName(QStringLiteral("strength"));
+        sizePolicy1.setHeightForWidth(strength->sizePolicy().hasHeightForWidth());
+        strength->setSizePolicy(sizePolicy1);
+        strength->setMinimumSize(QSize(50, 30));
+
+        Layout_hp_strength->addWidget(strength);
+
+
+        verticalLayout->addLayout(Layout_hp_strength);
+
+        Layout_defense_speed = new QHBoxLayout();
+        Layout_defense_speed->setObjectName(QStringLiteral("Layout_defense_speed"));
+        Layout_defense_speed->setSizeConstraint(QLayout::SetNoConstraint);
+        defenseFixed = new QLabel(verticalWidget);
+        defenseFixed->setObjectName(QStringLiteral("defenseFixed"));
+        sizePolicy1.setHeightForWidth(defenseFixed->sizePolicy().hasHeightForWidth());
+        defenseFixed->setSizePolicy(sizePolicy1);
+        defenseFixed->setMinimumSize(QSize(0, 30));
+        defenseFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_defense_speed->addWidget(defenseFixed);
+
+        defense = new QLabel(verticalWidget);
+        defense->setObjectName(QStringLiteral("defense"));
+        sizePolicy1.setHeightForWidth(defense->sizePolicy().hasHeightForWidth());
+        defense->setSizePolicy(sizePolicy1);
+        defense->setMinimumSize(QSize(50, 30));
+
+        Layout_defense_speed->addWidget(defense);
+
+        speedFixed = new QLabel(verticalWidget);
+        speedFixed->setObjectName(QStringLiteral("speedFixed"));
+        sizePolicy1.setHeightForWidth(speedFixed->sizePolicy().hasHeightForWidth());
+        speedFixed->setSizePolicy(sizePolicy1);
+        speedFixed->setMinimumSize(QSize(0, 30));
+        speedFixed->setMaximumSize(QSize(20, 16777215));
+
+        Layout_defense_speed->addWidget(speedFixed);
+
+        speed = new QLabel(verticalWidget);
+        speed->setObjectName(QStringLiteral("speed"));
+        sizePolicy1.setHeightForWidth(speed->sizePolicy().hasHeightForWidth());
+        speed->setSizePolicy(sizePolicy1);
+        speed->setMinimumSize(QSize(50, 30));
+
+        Layout_defense_speed->addWidget(speed);
+
+
+        verticalLayout->addLayout(Layout_defense_speed);
+
+        verticalLayout->setStretch(0, 1);
+        verticalLayout->setStretch(1, 1);
+        verticalLayout->setStretch(2, 1);
+        verticalLayout->setStretch(3, 1);
 
         retranslateUi(SingleCreature);
 
@@ -90,15 +221,20 @@ public:
 
     void retranslateUi(QWidget *SingleCreature) {
         SingleCreature->setWindowTitle(QApplication::translate("SingleCreature", "SingleCreature", nullptr));
-        levelFixed->setText(QApplication::translate("SingleCreature", "\347\272\247:", nullptr));
-        expFixed->setText(QApplication::translate("SingleCreature", "Ex:", nullptr));
-        hpFixed->setText(QApplication::translate("SingleCreature", "\344\275\223:", nullptr));
-        strengthFixed->setText(QApplication::translate("SingleCreature", "\345\212\233:", nullptr));
-        defenseFixed->setText(QApplication::translate("SingleCreature", "\351\230\262:", nullptr));
-        speedFixed->setText(QApplication::translate("SingleCreature", "\351\200\237:", nullptr));
-        nameFixed->setText(QApplication::translate("SingleCreature", "\345\220\215:", nullptr));
         name->setText(QApplication::translate("SingleCreature", "test", nullptr));
-        typeFixed->setText(QApplication::translate("SingleCreature", "\347\261\273:", nullptr));
+        type->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        levelFixed->setText(QApplication::translate("SingleCreature", "\347\272\247:", nullptr));
+        level->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        expFixed->setText(QApplication::translate("SingleCreature", "ex:", nullptr));
+        exp->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        hpFixed->setText(QApplication::translate("SingleCreature", "\344\275\223:", nullptr));
+        hp->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        strengthFixed->setText(QApplication::translate("SingleCreature", "\345\212\233:", nullptr));
+        strength->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        defenseFixed->setText(QApplication::translate("SingleCreature", "\351\230\262:", nullptr));
+        defense->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        speedFixed->setText(QApplication::translate("SingleCreature", "\351\200\237:", nullptr));
+        speed->setText(QApplication::translate("SingleCreature", "test", nullptr));
     } // retranslateUi
 
 };

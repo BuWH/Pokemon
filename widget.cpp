@@ -6,10 +6,11 @@ Widget::Widget(QWidget *parent)
         : QWidget(parent),
           ui(new Ui::Widget) {
     ui->setupUi(this);
-    test = new SingleCreature(this);
-    test->setGeometry(0, 0, 200, 200);
+    //test = new SingleCreature(this);
+    //test->setGeometry(0, 0, 200, 200);
     //test->raise();
-    test->show();
+    //test->show();
+    //ui->creatures_Layout->setAlignment(Qt::AlignTop);
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
@@ -21,7 +22,38 @@ Widget::~Widget() {
     delete currentCreature;
 }
 
-void Widget::refresh() {
+
+void Widget::upgradeCreature() {
+    currentCreature->upgrade();
+    refresh();
+}
+
+void Widget::generateCreature() {
+    if (user == nullptr) {
+        user = new User;
+    }
+    user->addCreature();
+    currentCreature = user->getCreature(user->getCreaturesNum() - 1);
+    test = new SingleCreature();
+    ui->creatures_Layout->addWidget(test, Qt::AlignTop);
+    creatures.append(test);
+    /*
+    ui->creatures_Layout->addWidget(test);
+    test->setCreature(currentCreature);
+    test->refresh();
+    test->show();
+    */
+    refresh();
+}
+
+void Widget::clearUser() {
+    delete user;
+    creatures.clear();
+    user = nullptr;
+    refresh();
+}
+
+void Widget::refresh_tab1() {
     if (user == nullptr) {
         ui->user_name->setText("用户名:");
         ui->creature_num->setText("精灵数量:");
@@ -70,25 +102,17 @@ void Widget::refresh() {
         temp.append(QString::number(currentCreature->getSpeed()));
         ui->speed->setText(temp);
     }
-
 }
 
-void Widget::upgradeCreature() {
-    currentCreature->upgrade();
-    this->refresh();
-}
-
-void Widget::generateCreature() {
-    if (user == nullptr) {
-        user = new User;
+void Widget::refresh_tab2() {
+    for (int i = 0; i < creatures.size(); ++i) {
+        creatures[i]->setCreature(user->getCreature(i));
+        creatures[i]->refresh();
+        creatures[i]->show();
     }
-    user->addCreature();
-    currentCreature = user->getCreature(user->getCreaturesNum() - 1);
-    this->refresh();
 }
 
-void Widget::clearUser() {
-    delete user;
-    user = nullptr;
-    this->refresh();
+void Widget::refresh() {
+    refresh_tab1();
+    refresh_tab2();
 }

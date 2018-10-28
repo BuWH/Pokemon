@@ -14,3 +14,30 @@ SingleCreature::SingleCreature(QWidget *parent)
 SingleCreature::~SingleCreature() {
     delete ui;
 }
+
+void SingleCreature::setCreature(BaseCreature *creature) {
+    this->creature = creature;
+    refresh();
+}
+
+void SingleCreature::refresh() {
+    if (creature != nullptr) {
+        ui->name->setText(creature->getName());
+        ui->type->setText(creature->getType());
+        ui->level->setText(QString::number(creature->getLevel()));
+        ui->exp->setText(QString::number(creature->getExp()));
+        ui->hp->setText(QString::number(creature->getHp()));
+        ui->strength->setText(QString::number(creature->getStrength()));
+        ui->defense->setText(QString::number(creature->getDefense()));
+        ui->speed->setText(QString::number(creature->getSpeed()));
+    } else {
+        ui->name->setText("Error Occurred!");
+        ui->type->clear();
+        ui->exp->clear();
+        ui->level->clear();
+        ui->strength->clear();
+        ui->hp->clear();
+        ui->defense->clear();
+        ui->speed->clear();
+    }
+}

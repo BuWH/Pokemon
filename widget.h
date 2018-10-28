@@ -25,6 +25,10 @@ public:
 protected:
     void refresh();
 
+    void refresh_tab1();
+
+    void refresh_tab2();
+
     void upgradeCreature();
     void generateCreature();
 
@@ -35,6 +39,8 @@ private:
     SingleCreature *test;
     BaseCreature *currentCreature;
     User *user;
+
+    QVector<SingleCreature *> creatures;
 };
 
 #endif // WIDGET_H

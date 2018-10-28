@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QDebug>
+#include "user.h"
 
 namespace Ui {
     class SingleCreature;
@@ -23,10 +24,13 @@ public:
 
     ~SingleCreature();
 
-protected:
+    void setCreature(BaseCreature *creature);
+
+    void refresh();
 
 private:
     Ui::SingleCreature *ui;
+    BaseCreature *creature;
 };
 
 
