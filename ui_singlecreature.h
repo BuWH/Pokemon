@@ -45,7 +45,7 @@ public:
         if (SingleCreature->objectName().isEmpty())
             SingleCreature->setObjectName(QStringLiteral("SingleCreature"));
         SingleCreature->resize(200, 120);
-        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(SingleCreature->sizePolicy().hasHeightForWidth());
@@ -58,6 +58,11 @@ public:
         verticalWidget = new QWidget(SingleCreature);
         verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
         verticalWidget->setGeometry(QRect(0, 0, 200, 120));
+        QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(verticalWidget->sizePolicy().hasHeightForWidth());
+        verticalWidget->setSizePolicy(sizePolicy1);
         verticalLayout = new QVBoxLayout(verticalWidget);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -68,19 +73,19 @@ public:
         Layout_name_type->setSizeConstraint(QLayout::SetNoConstraint);
         name = new QLabel(verticalWidget);
         name->setObjectName(QStringLiteral("name"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(name->sizePolicy().hasHeightForWidth());
-        name->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(name->sizePolicy().hasHeightForWidth());
+        name->setSizePolicy(sizePolicy2);
         name->setMinimumSize(QSize(50, 30));
 
         Layout_name_type->addWidget(name);
 
         type = new QLabel(verticalWidget);
         type->setObjectName(QStringLiteral("type"));
-        sizePolicy1.setHeightForWidth(type->sizePolicy().hasHeightForWidth());
-        type->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(type->sizePolicy().hasHeightForWidth());
+        type->setSizePolicy(sizePolicy2);
         type->setMinimumSize(QSize(50, 30));
 
         Layout_name_type->addWidget(type);
@@ -93,8 +98,8 @@ public:
         Layout_level_exp->setSizeConstraint(QLayout::SetNoConstraint);
         levelFixed = new QLabel(verticalWidget);
         levelFixed->setObjectName(QStringLiteral("levelFixed"));
-        sizePolicy1.setHeightForWidth(levelFixed->sizePolicy().hasHeightForWidth());
-        levelFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(levelFixed->sizePolicy().hasHeightForWidth());
+        levelFixed->setSizePolicy(sizePolicy2);
         levelFixed->setMinimumSize(QSize(0, 30));
         levelFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -102,8 +107,8 @@ public:
 
         level = new QLabel(verticalWidget);
         level->setObjectName(QStringLiteral("level"));
-        sizePolicy1.setHeightForWidth(level->sizePolicy().hasHeightForWidth());
-        level->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(level->sizePolicy().hasHeightForWidth());
+        level->setSizePolicy(sizePolicy2);
         level->setMinimumSize(QSize(50, 30));
 
         Layout_level_exp->addWidget(level);
@@ -111,8 +116,8 @@ public:
         expFixed = new QLabel(verticalWidget);
         expFixed->setObjectName(QStringLiteral("expFixed"));
         expFixed->setEnabled(true);
-        sizePolicy1.setHeightForWidth(expFixed->sizePolicy().hasHeightForWidth());
-        expFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(expFixed->sizePolicy().hasHeightForWidth());
+        expFixed->setSizePolicy(sizePolicy2);
         expFixed->setMinimumSize(QSize(0, 30));
         expFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -120,8 +125,8 @@ public:
 
         exp = new QLabel(verticalWidget);
         exp->setObjectName(QStringLiteral("exp"));
-        sizePolicy1.setHeightForWidth(exp->sizePolicy().hasHeightForWidth());
-        exp->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(exp->sizePolicy().hasHeightForWidth());
+        exp->setSizePolicy(sizePolicy2);
         exp->setMinimumSize(QSize(50, 30));
 
         Layout_level_exp->addWidget(exp);
@@ -134,8 +139,8 @@ public:
         Layout_hp_strength->setSizeConstraint(QLayout::SetNoConstraint);
         hpFixed = new QLabel(verticalWidget);
         hpFixed->setObjectName(QStringLiteral("hpFixed"));
-        sizePolicy1.setHeightForWidth(hpFixed->sizePolicy().hasHeightForWidth());
-        hpFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(hpFixed->sizePolicy().hasHeightForWidth());
+        hpFixed->setSizePolicy(sizePolicy2);
         hpFixed->setMinimumSize(QSize(0, 30));
         hpFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -143,16 +148,16 @@ public:
 
         hp = new QLabel(verticalWidget);
         hp->setObjectName(QStringLiteral("hp"));
-        sizePolicy1.setHeightForWidth(hp->sizePolicy().hasHeightForWidth());
-        hp->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(hp->sizePolicy().hasHeightForWidth());
+        hp->setSizePolicy(sizePolicy2);
         hp->setMinimumSize(QSize(50, 30));
 
         Layout_hp_strength->addWidget(hp);
 
         strengthFixed = new QLabel(verticalWidget);
         strengthFixed->setObjectName(QStringLiteral("strengthFixed"));
-        sizePolicy1.setHeightForWidth(strengthFixed->sizePolicy().hasHeightForWidth());
-        strengthFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(strengthFixed->sizePolicy().hasHeightForWidth());
+        strengthFixed->setSizePolicy(sizePolicy2);
         strengthFixed->setMinimumSize(QSize(0, 30));
         strengthFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -160,8 +165,8 @@ public:
 
         strength = new QLabel(verticalWidget);
         strength->setObjectName(QStringLiteral("strength"));
-        sizePolicy1.setHeightForWidth(strength->sizePolicy().hasHeightForWidth());
-        strength->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(strength->sizePolicy().hasHeightForWidth());
+        strength->setSizePolicy(sizePolicy2);
         strength->setMinimumSize(QSize(50, 30));
 
         Layout_hp_strength->addWidget(strength);
@@ -174,8 +179,8 @@ public:
         Layout_defense_speed->setSizeConstraint(QLayout::SetNoConstraint);
         defenseFixed = new QLabel(verticalWidget);
         defenseFixed->setObjectName(QStringLiteral("defenseFixed"));
-        sizePolicy1.setHeightForWidth(defenseFixed->sizePolicy().hasHeightForWidth());
-        defenseFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(defenseFixed->sizePolicy().hasHeightForWidth());
+        defenseFixed->setSizePolicy(sizePolicy2);
         defenseFixed->setMinimumSize(QSize(0, 30));
         defenseFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -183,16 +188,16 @@ public:
 
         defense = new QLabel(verticalWidget);
         defense->setObjectName(QStringLiteral("defense"));
-        sizePolicy1.setHeightForWidth(defense->sizePolicy().hasHeightForWidth());
-        defense->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(defense->sizePolicy().hasHeightForWidth());
+        defense->setSizePolicy(sizePolicy2);
         defense->setMinimumSize(QSize(50, 30));
 
         Layout_defense_speed->addWidget(defense);
 
         speedFixed = new QLabel(verticalWidget);
         speedFixed->setObjectName(QStringLiteral("speedFixed"));
-        sizePolicy1.setHeightForWidth(speedFixed->sizePolicy().hasHeightForWidth());
-        speedFixed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(speedFixed->sizePolicy().hasHeightForWidth());
+        speedFixed->setSizePolicy(sizePolicy2);
         speedFixed->setMinimumSize(QSize(0, 30));
         speedFixed->setMaximumSize(QSize(20, 16777215));
 
@@ -200,8 +205,8 @@ public:
 
         speed = new QLabel(verticalWidget);
         speed->setObjectName(QStringLiteral("speed"));
-        sizePolicy1.setHeightForWidth(speed->sizePolicy().hasHeightForWidth());
-        speed->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(speed->sizePolicy().hasHeightForWidth());
+        speed->setSizePolicy(sizePolicy2);
         speed->setMinimumSize(QSize(50, 30));
 
         Layout_defense_speed->addWidget(speed);

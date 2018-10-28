@@ -6,11 +6,6 @@ Widget::Widget(QWidget *parent)
         : QWidget(parent),
           ui(new Ui::Widget) {
     ui->setupUi(this);
-    //test = new SingleCreature(this);
-    //test->setGeometry(0, 0, 200, 200);
-    //test->raise();
-    //test->show();
-    //ui->creatures_Layout->setAlignment(Qt::AlignTop);
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
@@ -34,9 +29,11 @@ void Widget::generateCreature() {
     }
     user->addCreature();
     currentCreature = user->getCreature(user->getCreaturesNum() - 1);
-    test = new SingleCreature();
-    ui->creatures_Layout->addWidget(test, Qt::AlignTop);
+    test = new SingleCreature(ui->creatures_list);
+    ui->creatures_list_layout->addWidget(test, Qt::AlignTop);
+    test->setGeometry(0, (user->getCreaturesNum() - 1) * 120, 200, 120);
     creatures.append(test);
+    //ui->creatures_Layout->addWidget(test, Qt::AlignTop);
     /*
     ui->creatures_Layout->addWidget(test);
     test->setCreature(currentCreature);
@@ -105,6 +102,7 @@ void Widget::refresh_tab1() {
 }
 
 void Widget::refresh_tab2() {
+    ui->creatures_list->setFixedSize(200, creatures.size() * 120);
     for (int i = 0; i < creatures.size(); ++i) {
         creatures[i]->setCreature(user->getCreature(i));
         creatures[i]->refresh();
