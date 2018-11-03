@@ -20,23 +20,23 @@ public:
 
     void setName(QString name) { this->name = name; };
 
-    QString getName() { return this->name; };
+    QString getName() const { return this->name; };
 
-    int getLevel() { return this->level; };
+    int getLevel() const { return this->level; };
 
-    int getExp() { return this->exp; };
+    int getExp() const { return this->exp; };
 
-    int getHp() { return this->hp; };
+    int getHp() const { return this->hp; };
 
-    int getID() { return this->creature_id; };
+    int getID() const { return this->creature_id; };
 
-    float getStrength() { return this->strength; };
+    float getStrength() const { return this->strength; };
 
-    float getDefense() { return this->defense; };
+    float getDefense() const { return this->defense; };
 
-    float getSpeed() { return this->speed; };
+    float getSpeed() const { return this->speed; };
 
-    QString getType() {
+    QString getType() const {
         switch (this->type) {
             case Type::attacker:
                 return "力士";
@@ -82,12 +82,10 @@ protected:
     virtual void initAbility();
 
 private:
-
     Type type;
     QString name;
     int level;
     int exp;
-
     int creature_id;
     float strength;
     float defense;

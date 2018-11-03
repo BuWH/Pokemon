@@ -6,6 +6,7 @@ Widget::Widget(QWidget *parent)
         : QWidget(parent),
           ui(new Ui::Widget) {
     ui->setupUi(this);
+    this->setFixedWidth(300);
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
@@ -106,6 +107,13 @@ void Widget::refresh_tab2() {
     for (int i = 0; i < creatures.size(); ++i) {
         creatures[i]->setCreature(user->getCreature(i));
         creatures[i]->refresh();
+        if (i % 3 == 0) {
+            creatures[i]->setStyleSheet("background-color: rgb(215,215,215)");
+        } else if (i % 3 == 1) {
+            creatures[i]->setStyleSheet("background-color: rgb(200,200,200)");
+        } else if (i % 3 == 2) {
+            creatures[i]->setStyleSheet("background-color: rgb(230,230,230)");
+        }
         creatures[i]->show();
     }
 }

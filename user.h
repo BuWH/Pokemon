@@ -17,11 +17,11 @@ class User {
 public:
     User();
 
-    BaseCreature *getCreature(int i);
+    BaseCreature *getCreature(int i) const;
 
-    int getCreaturesNum() { return this->creatures.size(); };
+    int getCreaturesNum() const { return this->creatures.size(); };
 
-    QString getName() { return this->name; };
+    QString getName() const { return this->name; };
 
 public slots:
 

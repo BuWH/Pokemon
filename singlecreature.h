@@ -26,7 +26,7 @@ public:
 
     void setCreature(BaseCreature *creature);
 
-    void refresh();
+    void refresh() const;
 
 private:
     Ui::SingleCreature *ui;

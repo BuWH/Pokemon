@@ -24,7 +24,6 @@ BaseCreature *User::getRandomCreature() {
             creature = tempDefender;
             break;
         }
-
         case Type::tanker: {
             TankerCreatrue *tempTanker = new TankerCreatrue;
             creature = tempTanker;
@@ -40,14 +39,14 @@ BaseCreature *User::getRandomCreature() {
 }
 
 void User::addCreature() {
-    creatures.append(this->getRandomCreature());
+    this->creatures.append(this->getRandomCreature());
 }
 
 void User::addCreature(BaseCreature *&creature) {
     this->creatures.append(creature);
 }
 
-BaseCreature *User::getCreature(int i) {
+BaseCreature *User::getCreature(int i) const {
     if (i > this->creatures.size()) {
         return NULL;
     } else {

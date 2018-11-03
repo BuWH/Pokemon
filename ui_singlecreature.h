@@ -51,10 +51,7 @@ public:
         sizePolicy.setHeightForWidth(SingleCreature->sizePolicy().hasHeightForWidth());
         SingleCreature->setSizePolicy(sizePolicy);
         SingleCreature->setMinimumSize(QSize(200, 120));
-        SingleCreature->setStyleSheet(QLatin1String("QWidget{\n"
-                                                    "                background-color: yellow;\n"
-                                                    "                }\n"
-                                                    "            "));
+        SingleCreature->setStyleSheet(QStringLiteral(""));
         verticalWidget = new QWidget(SingleCreature);
         verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
         verticalWidget->setGeometry(QRect(0, 0, 200, 120));

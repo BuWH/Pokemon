@@ -20,7 +20,7 @@ void SingleCreature::setCreature(BaseCreature *creature) {
     refresh();
 }
 
-void SingleCreature::refresh() {
+void SingleCreature::refresh() const {
     if (creature != nullptr) {
         ui->name->setText(creature->getName());
         ui->type->setText(creature->getType());

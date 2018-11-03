@@ -9,13 +9,11 @@
 
 class AssassinCreatrue : public BaseCreature {
 public:
-
     AssassinCreatrue();
 
     void upgrade();
 
 protected:
-
     void initAbility();
 };
 
