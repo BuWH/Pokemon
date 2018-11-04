@@ -9,14 +9,11 @@
 
 class TankerCreatrue : public BaseCreature {
 public:
-
     TankerCreatrue();
 
     void upgrade();
-
 protected:
-
-    void initAbility();
+    virtual void initAbility();
 };
 
 #endif //POKEMON_TANKER_H

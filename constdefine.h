@@ -15,9 +15,16 @@ enum Type {
     assassin
 };
 
+enum Property {
+    gold,
+    wood,
+    water,
+    fire,
+    solid
+};
+
 const int LEVEL_TOP = 15;
 #define CREATURE_TYPES 4;
-
 
 const int ATTACKER_INIT_HP = 20;
 const float ATTACKER_INIT_STRENGTH = 5;

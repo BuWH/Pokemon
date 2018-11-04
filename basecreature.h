@@ -83,6 +83,7 @@ protected:
 
 private:
     Type type;
+    Property Property;
     QString name;
     int level;
     int exp;

@@ -24,7 +24,6 @@ public:
     QString getName() const { return this->name; };
 
 public slots:
-
     void setName(QString name) { this->name = name; };
 
     void addCreature();

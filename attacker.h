@@ -12,10 +12,8 @@ public:
     AttackerCreatrue();
 
     void upgrade();
-
 protected:
-
-    void initAbility();
+    virtual void initAbility();
 };
 
 

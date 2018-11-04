@@ -12,7 +12,7 @@ public:
     DefenderCreatrue();
     void upgrade();
 protected:
-    void initAbility();
+    virtual void initAbility();
 };
 
 #endif //POKEMON_DEFENDER_H

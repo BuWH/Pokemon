@@ -12,9 +12,8 @@ public:
     AssassinCreatrue();
 
     void upgrade();
-
 protected:
-    void initAbility();
+    virtual void initAbility();
 };
 
 #endif //POKEMON_ASSASSIN_H
