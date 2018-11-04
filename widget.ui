@@ -35,6 +35,9 @@
                              <verstretch>0</verstretch>
                          </sizepolicy>
                      </property>
+                     <property name="accessibleName">
+                         <string/>
+                     </property>
                      <property name="autoFillBackground">
                          <bool>false</bool>
                      </property>
@@ -239,10 +242,10 @@
                      <widget class="QScrollArea" name="scrollArea">
                          <property name="geometry">
                              <rect>
-                                 <x>50</x>
-                                 <y>140</y>
+                                 <x>40</x>
+                                 <y>130</y>
                                  <width>200</width>
-                                 <height>240</height>
+                                 <height>251</height>
                              </rect>
                          </property>
                          <property name="sizePolicy">
@@ -263,7 +266,7 @@
                                      <x>0</x>
                                      <y>0</y>
                                      <width>200</width>
-                                     <height>240</height>
+                                     <height>249</height>
                                  </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_3">

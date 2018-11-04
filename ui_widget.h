@@ -182,7 +182,7 @@ public:
         tab_2->setObjectName(QStringLiteral("tab_2"));
         scrollArea = new QScrollArea(tab_2);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setGeometry(QRect(50, 140, 200, 240));
+        scrollArea->setGeometry(QRect(40, 130, 200, 251));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -192,7 +192,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 200, 240));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 200, 249));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -230,6 +230,9 @@ public:
 
     void retranslateUi(QWidget *Widget) {
         Widget->setWindowTitle(QApplication::translate("Widget", "Pokemon Test", nullptr));
+#ifndef QT_NO_ACCESSIBILITY
+        tab_1->setAccessibleName(QString());
+#endif // QT_NO_ACCESSIBILITY
         user_name->setText(QApplication::translate("Widget", "\347\224\250\346\210\267\345\220\215:", nullptr));
         creature_num->setText(
                 QApplication::translate("Widget", "\347\262\276\347\201\265\346\225\260\351\207\217:", nullptr));

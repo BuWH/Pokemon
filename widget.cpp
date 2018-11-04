@@ -7,12 +7,16 @@ Widget::Widget(QWidget *parent)
           ui(new Ui::Widget) {
     ui->setupUi(this);
     this->setFixedWidth(300);
+    ui->scrollArea->setStyleSheet("QScrollArea {background-color:transparent;}");
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
 }
 
 Widget::~Widget() {
+    for (int i = 0; i < creatures.size(); ++i) {
+        delete creatures[i];
+    }
     delete ui;
     delete user;
     delete currentCreature;
@@ -45,6 +49,10 @@ void Widget::generateCreature() {
 }
 
 void Widget::clearUser() {
+    for (int i = 0; i < creatures.size(); ++i) {
+        ui->creatures_list_layout->removeWidget(creatures[i]);
+        delete creatures[i];
+    }
     delete user;
     creatures.clear();
     user = nullptr;
