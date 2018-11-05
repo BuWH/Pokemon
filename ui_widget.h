@@ -25,12 +25,13 @@ public:
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
     QWidget *tab_1;
-    QVBoxLayout *tab_1_layout;
+    QVBoxLayout *verticalLayout_2;
     QLabel *user_name;
     QLabel *creature_num;
     QLabel *name;
     QLabel *id;
     QLabel *type;
+    QLabel *property;
     QLabel *level;
     QLabel *exp;
     QLabel *hp;
@@ -68,10 +69,10 @@ public:
         sizePolicy.setHeightForWidth(tab_1->sizePolicy().hasHeightForWidth());
         tab_1->setSizePolicy(sizePolicy);
         tab_1->setAutoFillBackground(false);
-        tab_1_layout = new QVBoxLayout(tab_1);
-        tab_1_layout->setSpacing(6);
-        tab_1_layout->setContentsMargins(11, 11, 11, 11);
-        tab_1_layout->setObjectName(QStringLiteral("tab_1_layout"));
+            verticalLayout_2 = new QVBoxLayout(tab_1);
+            verticalLayout_2->setSpacing(6);
+            verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+            verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         user_name = new QLabel(tab_1);
         user_name->setObjectName(QStringLiteral("user_name"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Minimum);
@@ -80,77 +81,84 @@ public:
         sizePolicy1.setHeightForWidth(user_name->sizePolicy().hasHeightForWidth());
         user_name->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(user_name);
+            verticalLayout_2->addWidget(user_name);
 
         creature_num = new QLabel(tab_1);
         creature_num->setObjectName(QStringLiteral("creature_num"));
         sizePolicy1.setHeightForWidth(creature_num->sizePolicy().hasHeightForWidth());
         creature_num->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(creature_num);
+            verticalLayout_2->addWidget(creature_num);
 
         name = new QLabel(tab_1);
         name->setObjectName(QStringLiteral("name"));
         sizePolicy1.setHeightForWidth(name->sizePolicy().hasHeightForWidth());
         name->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(name);
+            verticalLayout_2->addWidget(name);
 
         id = new QLabel(tab_1);
         id->setObjectName(QStringLiteral("id"));
         sizePolicy1.setHeightForWidth(id->sizePolicy().hasHeightForWidth());
         id->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(id);
+            verticalLayout_2->addWidget(id);
 
         type = new QLabel(tab_1);
         type->setObjectName(QStringLiteral("type"));
         sizePolicy1.setHeightForWidth(type->sizePolicy().hasHeightForWidth());
         type->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(type);
+            verticalLayout_2->addWidget(type);
+
+            property = new QLabel(tab_1);
+            property->setObjectName(QStringLiteral("property"));
+            sizePolicy1.setHeightForWidth(property->sizePolicy().hasHeightForWidth());
+            property->setSizePolicy(sizePolicy1);
+
+            verticalLayout_2->addWidget(property);
 
         level = new QLabel(tab_1);
         level->setObjectName(QStringLiteral("level"));
         sizePolicy1.setHeightForWidth(level->sizePolicy().hasHeightForWidth());
         level->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(level);
+            verticalLayout_2->addWidget(level);
 
         exp = new QLabel(tab_1);
         exp->setObjectName(QStringLiteral("exp"));
         sizePolicy1.setHeightForWidth(exp->sizePolicy().hasHeightForWidth());
         exp->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(exp);
+            verticalLayout_2->addWidget(exp);
 
         hp = new QLabel(tab_1);
         hp->setObjectName(QStringLiteral("hp"));
         sizePolicy1.setHeightForWidth(hp->sizePolicy().hasHeightForWidth());
         hp->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(hp);
+            verticalLayout_2->addWidget(hp);
 
         strength = new QLabel(tab_1);
         strength->setObjectName(QStringLiteral("strength"));
         sizePolicy1.setHeightForWidth(strength->sizePolicy().hasHeightForWidth());
         strength->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(strength);
+            verticalLayout_2->addWidget(strength);
 
         defense = new QLabel(tab_1);
         defense->setObjectName(QStringLiteral("defense"));
         sizePolicy1.setHeightForWidth(defense->sizePolicy().hasHeightForWidth());
         defense->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(defense);
+            verticalLayout_2->addWidget(defense);
 
         speed = new QLabel(tab_1);
         speed->setObjectName(QStringLiteral("speed"));
         sizePolicy1.setHeightForWidth(speed->sizePolicy().hasHeightForWidth());
         speed->setSizePolicy(sizePolicy1);
 
-        tab_1_layout->addWidget(speed);
+            verticalLayout_2->addWidget(speed);
 
         generate = new QPushButton(tab_1);
         generate->setObjectName(QStringLiteral("generate"));
@@ -161,21 +169,21 @@ public:
         generate->setSizePolicy(sizePolicy2);
         generate->setMinimumSize(QSize(0, 0));
 
-        tab_1_layout->addWidget(generate);
+            verticalLayout_2->addWidget(generate);
 
         upgrade = new QPushButton(tab_1);
         upgrade->setObjectName(QStringLiteral("upgrade"));
         sizePolicy2.setHeightForWidth(upgrade->sizePolicy().hasHeightForWidth());
         upgrade->setSizePolicy(sizePolicy2);
 
-        tab_1_layout->addWidget(upgrade);
+            verticalLayout_2->addWidget(upgrade);
 
         clear = new QPushButton(tab_1);
         clear->setObjectName(QStringLiteral("clear"));
         sizePolicy2.setHeightForWidth(clear->sizePolicy().hasHeightForWidth());
         clear->setSizePolicy(sizePolicy2);
 
-        tab_1_layout->addWidget(clear);
+            verticalLayout_2->addWidget(clear);
 
         tabWidget->addTab(tab_1, QString());
         tab_2 = new QWidget();
@@ -222,7 +230,7 @@ public:
 
         retranslateUi(Widget);
 
-        tabWidget->setCurrentIndex(1);
+            tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Widget);
@@ -234,11 +242,12 @@ public:
         tab_1->setAccessibleName(QString());
 #endif // QT_NO_ACCESSIBILITY
         user_name->setText(QApplication::translate("Widget", "\347\224\250\346\210\267\345\220\215:", nullptr));
-        creature_num->setText(
-                QApplication::translate("Widget", "\347\262\276\347\201\265\346\225\260\351\207\217:", nullptr));
+            creature_num->setText(
+                    QApplication::translate("Widget", "\347\262\276\347\201\265\346\225\260\351\207\217:", nullptr));
         name->setText(QApplication::translate("Widget", "\345\220\215:", nullptr));
         id->setText(QApplication::translate("Widget", "\347\274\226:", nullptr));
         type->setText(QApplication::translate("Widget", "\347\261\273:", nullptr));
+            property->setText(QApplication::translate("Widget", "\346\200\247:", nullptr));
         level->setText(QApplication::translate("Widget", "\347\272\247:", nullptr));
         exp->setText(QApplication::translate("Widget", "Ex:", nullptr));
         hp->setText(QApplication::translate("Widget", "\344\275\223:", nullptr));

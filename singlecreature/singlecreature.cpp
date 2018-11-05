@@ -30,6 +30,7 @@ void SingleCreature::refresh() const {
         ui->strength->setText(QString::number(creature->getStrength()));
         ui->defense->setText(QString::number(creature->getDefense()));
         ui->speed->setText(QString::number(creature->getSpeed()));
+        ui->property->setText(creature->getPropertyString());
     } else {
         ui->name->setText("Error Occurred!");
         ui->type->clear();
@@ -37,6 +38,7 @@ void SingleCreature::refresh() const {
         ui->level->clear();
         ui->strength->clear();
         ui->hp->clear();
+        ui->property->clear();
         ui->defense->clear();
         ui->speed->clear();
     }

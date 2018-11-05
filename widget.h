@@ -24,14 +24,10 @@ public:
 
 protected:
     void refresh();
-
     void refresh_tab1();
-
     void refresh_tab2();
-
     void upgradeCreature();
     void generateCreature();
-
     void clearUser();
 
 private:

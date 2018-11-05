@@ -10,7 +10,7 @@ User::User(QString name) {
 }
 
 BaseCreature *User::getRandomCreature() {
-    static std::default_random_engine e;
+    static std::default_random_engine e(unsigned(time(NULL)));
     static std::uniform_int_distribution<int> dis(0, 3);
     BaseCreature *creature;
     switch (dis(e)) {

@@ -24,6 +24,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *Layout_name_type;
     QLabel *name;
+    QLabel *property;
     QLabel *type;
     QHBoxLayout *Layout_level_exp;
     QLabel *levelFixed;
@@ -78,6 +79,16 @@ public:
         name->setMinimumSize(QSize(50, 30));
 
         Layout_name_type->addWidget(name);
+
+        property = new QLabel(verticalWidget);
+        property->setObjectName(QStringLiteral("property"));
+        sizePolicy2.setHeightForWidth(property->sizePolicy().hasHeightForWidth());
+        property->setSizePolicy(sizePolicy2);
+        property->setMinimumSize(QSize(50, 30));
+        property->setLayoutDirection(Qt::LeftToRight);
+        property->setAlignment(Qt::AlignCenter);
+
+        Layout_name_type->addWidget(property);
 
         type = new QLabel(verticalWidget);
         type->setObjectName(QStringLiteral("type"));
@@ -224,6 +235,7 @@ public:
     void retranslateUi(QWidget *SingleCreature) {
         SingleCreature->setWindowTitle(QApplication::translate("SingleCreature", "SingleCreature", nullptr));
         name->setText(QApplication::translate("SingleCreature", "test", nullptr));
+        property->setText(QApplication::translate("SingleCreature", "test", nullptr));
         type->setText(QApplication::translate("SingleCreature", "test", nullptr));
         levelFixed->setText(QApplication::translate("SingleCreature", "\347\272\247:", nullptr));
         level->setText(QApplication::translate("SingleCreature", "test", nullptr));

@@ -10,6 +10,7 @@ BaseCreature::BaseCreature() {
     this->creature_id = id;
     this->level = 1;
     this->exp = 0;
+    this->initProperty();
     this->initAbility();
 }
 
@@ -41,4 +42,32 @@ float BaseCreature::randomGrow(float attribute) {
 }
 
 void BaseCreature::initAbility() {
+    //virtual function
+}
+
+void BaseCreature::initProperty() {
+    static std::default_random_engine e(unsigned(time(NULL)));
+    static std::uniform_int_distribution<int> dis(0, 4);
+    switch (dis(e)) {
+        case Property::gold: {
+            this->property = Property::gold;
+            break;
+        }
+        case Property::wood: {
+            this->property = Property::wood;
+            break;
+        }
+        case Property::water: {
+            this->property = Property::water;
+            break;
+        }
+        case Property::fire: {
+            this->property = Property::fire;
+            break;
+        }
+        case Property::solid: {
+            this->property = Property::solid;
+            break;
+        }
+    }
 }

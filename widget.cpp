@@ -59,6 +59,7 @@ void Widget::refresh_tab1() {
         ui->name->setText("名:");
         ui->id->setText("编:");
         ui->type->setText("类:");
+        ui->property->setText("性:");
         ui->level->setText("级:");
         ui->exp->setText("Ex:");
         ui->hp->setText("体:");
@@ -82,6 +83,9 @@ void Widget::refresh_tab1() {
         temp = "类: ";
         temp.append(currentCreature->getType());
         ui->type->setText(temp);
+        temp = "性: ";
+        temp.append(currentCreature->getPropertyString());
+        ui->property->setText(temp);
         temp = "级: ";
         temp.append(QString::number(currentCreature->getLevel()));
         ui->level->setText(temp);

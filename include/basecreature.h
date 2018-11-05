@@ -49,6 +49,24 @@ public:
         }
     }
 
+    Property getProperty() const { return this->property; };
+
+    QString getPropertyString() const {
+        switch (this->property) {
+            case Property::gold:
+                return "金";
+            case Property::wood:
+                return "木";
+            case Property::water:
+                return "水";
+            case Property::fire:
+                return "火";
+            case Property::solid:
+                return "土";
+
+        }
+    }
+
     virtual void upgrade();
 
 protected:
@@ -77,9 +95,11 @@ protected:
 
     virtual void initAbility();
 
+    void initProperty();
+
 private:
     Type type;
-    Property Property;
+    Property property;
     QString name;
     int level;
     int exp;
