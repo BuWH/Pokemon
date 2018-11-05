@@ -2,17 +2,19 @@
 // Created by 温和 on 2018/10/7.
 //
 #pragma once
-#ifndef POKEMON_DEFENDER_H
-#define POKEMON_DEFENDER_H
+#ifndef POKEMON_TANKER_H
+#define POKEMON_TANKER_H
 
 #include "basecreature.h"
 
-class DefenderCreatrue : public BaseCreature {
+class TankerCreatrue : public BaseCreature {
 public:
-    DefenderCreatrue();
+    TankerCreatrue();
+
     void upgrade();
+
 protected:
     virtual void initAbility();
 };
 
-#endif //POKEMON_DEFENDER_H
+#endif //POKEMON_TANKER_H

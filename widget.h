@@ -6,8 +6,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include "user.h"
-#include "singlecreature.h"
+#include "/Users/wenhe/code/Pokemon/include/user.h"
+#include "singlecreature/singlecreature.h"
 
 namespace Ui {
     class Widget;

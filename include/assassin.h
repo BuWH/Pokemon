@@ -12,6 +12,7 @@ public:
     AssassinCreatrue();
 
     void upgrade();
+
 protected:
     virtual void initAbility();
 };

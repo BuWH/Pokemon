@@ -1,12 +1,12 @@
 //
 // Created by 温和 on 2018/10/16.
 //
-#include "user.h"
+#include "/Users/wenhe/code/Pokemon/include/user.h"
 #include <random>
-#include <time.h>
+#include <ctime>
 
-User::User() {
-    this->name = "wenhe";
+User::User(QString name) {
+    this->name = name;
 }
 
 BaseCreature *User::getRandomCreature() {
@@ -15,22 +15,22 @@ BaseCreature *User::getRandomCreature() {
     BaseCreature *creature;
     switch (dis(e)) {
         case Type::attacker: {
-            AttackerCreatrue *tempAttacker = new AttackerCreatrue;
+            auto tempAttacker = new AttackerCreatrue;
             creature = tempAttacker;
             break;
         }
         case Type::defender: {
-            DefenderCreatrue *tempDefender = new DefenderCreatrue;
+            auto tempDefender = new DefenderCreatrue;
             creature = tempDefender;
             break;
         }
         case Type::tanker: {
-            TankerCreatrue *tempTanker = new TankerCreatrue;
+            auto *tempTanker = new TankerCreatrue;
             creature = tempTanker;
             break;
         }
         case Type::assassin: {
-            AssassinCreatrue *tempAssassin = new AssassinCreatrue;
+            auto *tempAssassin = new AssassinCreatrue;
             creature = tempAssassin;
             break;
         }
@@ -48,7 +48,7 @@ void User::addCreature(BaseCreature *&creature) {
 
 BaseCreature *User::getCreature(int i) const {
     if (i > this->creatures.size()) {
-        return NULL;
+        return nullptr;
     } else {
         return creatures[i];
     }

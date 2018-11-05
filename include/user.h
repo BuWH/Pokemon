@@ -15,7 +15,7 @@
 
 class User {
 public:
-    User();
+    User(QString name);
 
     BaseCreature *getCreature(int i) const;
 
@@ -24,7 +24,8 @@ public:
     QString getName() const { return this->name; };
 
 public slots:
-    void setName(QString name) { this->name = name; };
+
+    //void setName(QString name) { this->name = name; };
 
     void addCreature();
 

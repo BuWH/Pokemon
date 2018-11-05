@@ -15,7 +15,7 @@ class BaseCreature {
 
 public:
     static int id;
-    
+
     BaseCreature();
 
     void setName(QString name) { this->name = name; };
@@ -48,10 +48,6 @@ public:
                 return "刺客";
         }
     }
-
-    void printCreature();
-
-    void printCreature_QT();
 
     virtual void upgrade();
 

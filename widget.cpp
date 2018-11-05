@@ -14,8 +14,8 @@ Widget::Widget(QWidget *parent)
 }
 
 Widget::~Widget() {
-    for (int i = 0; i < creatures.size(); ++i) {
-        delete creatures[i];
+    for (auto &creature : creatures) {
+        delete creature;
     }
     delete ui;
     delete user;
@@ -30,7 +30,7 @@ void Widget::upgradeCreature() {
 
 void Widget::generateCreature() {
     if (user == nullptr) {
-        user = new User;
+        user = new User("wenhe");
     }
     user->addCreature();
     currentCreature = user->getCreature(user->getCreaturesNum() - 1);
@@ -38,20 +38,13 @@ void Widget::generateCreature() {
     ui->creatures_list_layout->addWidget(test, Qt::AlignTop);
     test->setGeometry(0, (user->getCreaturesNum() - 1) * 120, 200, 120);
     creatures.append(test);
-    //ui->creatures_Layout->addWidget(test, Qt::AlignTop);
-    /*
-    ui->creatures_Layout->addWidget(test);
-    test->setCreature(currentCreature);
-    test->refresh();
-    test->show();
-    */
     refresh();
 }
 
 void Widget::clearUser() {
-    for (int i = 0; i < creatures.size(); ++i) {
-        ui->creatures_list_layout->removeWidget(creatures[i]);
-        delete creatures[i];
+    for (auto &creature : creatures) {
+        ui->creatures_list_layout->removeWidget(creature);
+        delete creature;
     }
     delete user;
     creatures.clear();
