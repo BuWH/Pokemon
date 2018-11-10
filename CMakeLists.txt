@@ -13,7 +13,7 @@ find_package(Qt5 COMPONENTS Core Gui Widgets Network REQUIRED)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src
+        ${PROJECT_SOURCE_DIR}/fight
         ${PROJECT_SOURCE_DIR}/singlecreature
 )
 
@@ -22,6 +22,8 @@ file(GLOB SOURCE_FILES
         "${PROJECT_SOURCE_DIR}/singlecreature/*.h"
         "${PROJECT_SOURCE_DIR}/singlecreature/*.cpp"
         "${PROJECT_SOURCE_DIR}/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/fight/*.h"
+        "${PROJECT_SOURCE_DIR}/fight/*.cpp"
         "${PROJECT_SOURCE_DIR}/*.h"
         "${PROJECT_SOURCE_DIR}/*.cpp"
         )

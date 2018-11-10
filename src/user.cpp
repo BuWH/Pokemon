@@ -6,8 +6,17 @@
 #include <ctime>
 
 User::User(QString name) {
+    this->id = user_id;
     this->name = name;
 }
+
+User::~User() {
+    for (auto &creature : creatures) {
+        delete creature;
+    }
+    creatures.clear();
+}
+
 
 BaseCreature *User::getRandomCreature() {
     static std::default_random_engine e(unsigned(time(NULL)));
@@ -34,6 +43,8 @@ BaseCreature *User::getRandomCreature() {
             creature = tempAssassin;
             break;
         }
+        default:
+            break;
     }
     return creature;
 }

@@ -17,29 +17,33 @@ class User {
 public:
     User(QString name);
 
+    ~User();
+
+    static unsigned int user_id;
+
+
+
     BaseCreature *getCreature(int i) const;
-
     int getCreaturesNum() const { return this->creatures.size(); };
-
     QString getName() const { return this->name; };
 
+    float getWinRate() const { return float(winFights / totalFights); };
+
+    unsigned int getId() const { return this->id; };
+
 public slots:
-
-    //void setName(QString name) { this->name = name; };
-
     void addCreature();
 
     void addCreature(BaseCreature *&creature);
 
 private:
     QString name;
-
-    //float getWinRate();
-
     QVector<BaseCreature *> creatures;
+    int winFights;
+    int totalFights;
+    unsigned int id;
 
     BaseCreature *getRandomCreature();
-
 };
 
 #endif //POKEMON_USER_H

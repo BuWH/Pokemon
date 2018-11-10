@@ -11,7 +11,7 @@ class AssassinCreatrue : public BaseCreature {
 public:
     AssassinCreatrue();
 
-    void upgrade();
+    virtual void upgrade();
 
 protected:
     virtual void initAbility();

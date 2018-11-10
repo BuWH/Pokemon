@@ -7,7 +7,6 @@ Widget::Widget(QWidget *parent)
           ui(new Ui::Widget) {
     ui->setupUi(this);
     this->setFixedWidth(300);
-    ui->scrollArea->setStyleSheet("QScrollArea {background-color:transparent;}");
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);

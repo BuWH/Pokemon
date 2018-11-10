@@ -267,6 +267,9 @@
                                  <verstretch>0</verstretch>
                              </sizepolicy>
                          </property>
+                         <property name="styleSheet">
+                             <string notr="true">QScrollArea {background-color:transparent;}</string>
+                         </property>
                          <property name="horizontalScrollBarPolicy">
                              <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>

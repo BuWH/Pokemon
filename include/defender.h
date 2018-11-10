@@ -11,7 +11,7 @@ class DefenderCreatrue : public BaseCreature {
 public:
     DefenderCreatrue();
 
-    void upgrade();
+    virtual void upgrade();
 
 protected:
     virtual void initAbility();

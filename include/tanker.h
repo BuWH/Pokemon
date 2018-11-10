@@ -11,7 +11,7 @@ class TankerCreatrue : public BaseCreature {
 public:
     TankerCreatrue();
 
-    void upgrade();
+    virtual void upgrade();
 
 protected:
     virtual void initAbility();

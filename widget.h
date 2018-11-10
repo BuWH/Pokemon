@@ -35,7 +35,6 @@ private:
     SingleCreature *test;
     BaseCreature *currentCreature;
     User *user;
-
     QVector<SingleCreature *> creatures;
 };
 

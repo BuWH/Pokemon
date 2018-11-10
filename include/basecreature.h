@@ -14,28 +14,20 @@
 class BaseCreature {
 
 public:
-    static int id;
-
+    static unsigned int creature_id;
     BaseCreature();
 
     void setName(QString name) { this->name = name; };
 
     QString getName() const { return this->name; };
-
     int getLevel() const { return this->level; };
-
     int getExp() const { return this->exp; };
-
     int getHp() const { return this->hp; };
 
-    int getID() const { return this->creature_id; };
-
+    unsigned int getID() const { return this->id; };
     float getStrength() const { return this->strength; };
-
     float getDefense() const { return this->defense; };
-
     float getSpeed() const { return this->speed; };
-
     QString getType() const {
         switch (this->type) {
             case Type::attacker:
@@ -46,11 +38,12 @@ public:
                 return "御者";
             case Type::assassin:
                 return "刺客";
+            default:
+                return "ERROR";
         }
     }
 
     Property getProperty() const { return this->property; };
-
     QString getPropertyString() const {
         switch (this->property) {
             case Property::gold:
@@ -63,39 +56,34 @@ public:
                 return "火";
             case Property::solid:
                 return "土";
+            default:
+                return "ERROR";
+        }
+    }
 
+    void initLevel(int level) {
+        for (int i = 0; i < (this->level - level); ++i) {
+            upgrade();
         }
     }
 
     virtual void upgrade();
 
 protected:
-
     void setType(Type type) { this->type = type; };
-
-    void setLevel(int level) { this->level = level; };
-
     void setHp(int hp) { this->hp = hp; };
 
-    void setExp(int exp) { this->exp = exp; };
-
+    void setLevel(int level) { this->level = level; };
     void setStrength(float strength) { this->strength = strength; };
-
     void setDefense(float defense) { this->defense = defense; };
-
     void setSpeed(float interval) { this->speed = interval; };
 
     void addExp(int exp);
 
-    int attack();
-
-    void defend(float attack);
-
     float randomGrow(float attribute);
 
-    virtual void initAbility();
-
     void initProperty();
+    virtual void initAbility();
 
 private:
     Type type;
@@ -103,7 +91,7 @@ private:
     QString name;
     int level;
     int exp;
-    int creature_id;
+    unsigned int id;
     float strength;
     float defense;
     int hp;
