@@ -72,7 +72,6 @@ public:
 protected:
     void setType(Type type) { this->type = type; };
     void setHp(int hp) { this->hp = hp; };
-
     void setLevel(int level) { this->level = level; };
     void setStrength(float strength) { this->strength = strength; };
     void setDefense(float defense) { this->defense = defense; };
