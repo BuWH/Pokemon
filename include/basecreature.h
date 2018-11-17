@@ -16,7 +16,7 @@ class BaseCreature {
 public:
     static unsigned int creature_id;
     BaseCreature();
-
+    ~BaseCreature();
     void setName(QString name) { this->name = name; };
 
     QString getName() const { return this->name; };

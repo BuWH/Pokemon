@@ -20,7 +20,8 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Widget {
+class Ui_Widget
+{
 public:
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
@@ -38,6 +39,7 @@ public:
     QLabel *strength;
     QLabel *defense;
     QLabel *speed;
+    QPushButton *fight;
     QPushButton *generate;
     QPushButton *upgrade;
     QPushButton *clear;
@@ -47,8 +49,10 @@ public:
     QVBoxLayout *verticalLayout_3;
     QWidget *creatures_list;
     QVBoxLayout *creatures_list_layout;
+    QWidget *tab;
 
-    void setupUi(QWidget *Widget) {
+    void setupUi(QWidget *Widget)
+    {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
         Widget->setEnabled(true);
@@ -160,11 +164,19 @@ public:
 
         verticalLayout_2->addWidget(speed);
 
-        generate = new QPushButton(tab_1);
-        generate->setObjectName(QStringLiteral("generate"));
+        fight = new QPushButton(tab_1);
+        fight->setObjectName(QStringLiteral("fight"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(fight->sizePolicy().hasHeightForWidth());
+        fight->setSizePolicy(sizePolicy2);
+        fight->setMinimumSize(QSize(0, 0));
+
+        verticalLayout_2->addWidget(fight);
+
+        generate = new QPushButton(tab_1);
+        generate->setObjectName(QStringLiteral("generate"));
         sizePolicy2.setHeightForWidth(generate->sizePolicy().hasHeightForWidth());
         generate->setSizePolicy(sizePolicy2);
         generate->setMinimumSize(QSize(0, 0));
@@ -225,6 +237,9 @@ public:
 
         scrollArea->setWidget(scrollAreaWidgetContents);
         tabWidget->addTab(tab_2, QString());
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        tabWidget->addTab(tab, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -237,14 +252,14 @@ public:
         QMetaObject::connectSlotsByName(Widget);
     } // setupUi
 
-    void retranslateUi(QWidget *Widget) {
+    void retranslateUi(QWidget *Widget)
+    {
         Widget->setWindowTitle(QApplication::translate("Widget", "Pokemon Test", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         tab_1->setAccessibleName(QString());
 #endif // QT_NO_ACCESSIBILITY
         user_name->setText(QApplication::translate("Widget", "\347\224\250\346\210\267\345\220\215:", nullptr));
-        creature_num->setText(
-                QApplication::translate("Widget", "\347\262\276\347\201\265\346\225\260\351\207\217:", nullptr));
+        creature_num->setText(QApplication::translate("Widget", "\347\262\276\347\201\265\346\225\260\351\207\217:", nullptr));
         name->setText(QApplication::translate("Widget", "\345\220\215:", nullptr));
         id->setText(QApplication::translate("Widget", "\347\274\226:", nullptr));
         type->setText(QApplication::translate("Widget", "\347\261\273:", nullptr));
@@ -255,18 +270,19 @@ public:
         strength->setText(QApplication::translate("Widget", "\345\212\233:", nullptr));
         defense->setText(QApplication::translate("Widget", "\351\230\262:", nullptr));
         speed->setText(QApplication::translate("Widget", "\351\200\237:", nullptr));
+        fight->setText(QApplication::translate("Widget", "fight test", nullptr));
         generate->setText(QApplication::translate("Widget", "\345\257\273\346\211\276", nullptr));
         upgrade->setText(QApplication::translate("Widget", "\345\215\207\347\272\247", nullptr));
         clear->setText(QApplication::translate("Widget", "\346\270\205\347\251\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QApplication::translate("Widget", "Tab 1", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Widget", "Tab 2", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Widget", "\351\241\265", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Widget : public Ui_Widget {
-    };
+    class Widget: public Ui_Widget {};
 } // namespace Ui
 
 QT_END_NAMESPACE

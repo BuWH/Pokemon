@@ -7,18 +7,25 @@ Widget::Widget(QWidget *parent)
           ui(new Ui::Widget) {
     ui->setupUi(this);
     this->setFixedWidth(300);
+    ui->fight->setDisabled(true);
+    ui->upgrade->setDisabled(true);
+    //ui->tab_1->setWindowIconText("Single");
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
+    connect(ui->fight, &QPushButton::clicked, this, &Widget::fightTest);
 }
 
 Widget::~Widget() {
     for (auto &creature : creatures) {
-        delete creature;
+        ui->creatures_list_layout->removeWidget(creature);
     }
+    creatures.clear();
+    if(user)
+        delete user;
+    if(tempCreature)
+        delete tempCreature;
     delete ui;
-    delete user;
-    delete currentCreature;
 }
 
 
@@ -33,22 +40,30 @@ void Widget::generateCreature() {
     }
     user->addCreature();
     currentCreature = user->getCreature(user->getCreaturesNum() - 1);
-    test = new SingleCreature(ui->creatures_list);
-    ui->creatures_list_layout->addWidget(test, Qt::AlignTop);
-    test->setGeometry(0, (user->getCreaturesNum() - 1) * 120, 200, 120);
-    creatures.append(test);
+    tempCreature = new SingleCreature(ui->creatures_list);
+    ui->creatures_list_layout->addWidget(tempCreature, Qt::AlignTop);
+    tempCreature->setGeometry(0, (user->getCreaturesNum() - 1) * 120, 200, 120);
+    creatures.append(tempCreature);
+
     refresh();
 }
 
 void Widget::clearUser() {
-    for (auto &creature : creatures) {
-        ui->creatures_list_layout->removeWidget(creature);
-        delete creature;
+    if(user){
+        for (auto &creature : creatures) {
+            ui->creatures_list_layout->removeWidget(creature);
+        }
+        creatures.clear();
+        delete user;
+        user = nullptr;
+        refresh();
     }
-    delete user;
-    creatures.clear();
-    user = nullptr;
-    refresh();
+}
+
+void Widget::fightTest() {
+    fight = new Fight;
+    fight->init(*user, currentCreature, user->getCreature(0));
+    fight->show();
 }
 
 void Widget::refresh_tab1() {
@@ -65,6 +80,9 @@ void Widget::refresh_tab1() {
         ui->strength->setText("力:");
         ui->defense->setText("防:");
         ui->speed->setText("速:");
+
+        ui->upgrade->setDisabled(true);
+        ui->fight->setDisabled(true);
     } else {
         QString temp;
         temp = "用户名: ";
@@ -103,6 +121,10 @@ void Widget::refresh_tab1() {
         temp = "速: ";
         temp.append(QString::number(currentCreature->getSpeed()));
         ui->speed->setText(temp);
+
+        if(user->getCreaturesNum() >= 2)
+            ui->fight->setDisabled(false);
+        ui->upgrade->setDisabled(false);
     }
 }
 

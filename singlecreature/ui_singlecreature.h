@@ -18,7 +18,8 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_SingleCreature {
+class Ui_SingleCreature
+{
 public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout;
@@ -42,7 +43,8 @@ public:
     QLabel *speedFixed;
     QLabel *speed;
 
-    void setupUi(QWidget *SingleCreature) {
+    void setupUi(QWidget *SingleCreature)
+    {
         if (SingleCreature->objectName().isEmpty())
             SingleCreature->setObjectName(QStringLiteral("SingleCreature"));
         SingleCreature->resize(200, 120);
@@ -232,7 +234,8 @@ public:
         QMetaObject::connectSlotsByName(SingleCreature);
     } // setupUi
 
-    void retranslateUi(QWidget *SingleCreature) {
+    void retranslateUi(QWidget *SingleCreature)
+    {
         SingleCreature->setWindowTitle(QApplication::translate("SingleCreature", "SingleCreature", nullptr));
         name->setText(QApplication::translate("SingleCreature", "test", nullptr));
         property->setText(QApplication::translate("SingleCreature", "test", nullptr));
@@ -254,8 +257,7 @@ public:
 };
 
 namespace Ui {
-    class SingleCreature : public Ui_SingleCreature {
-    };
+    class SingleCreature: public Ui_SingleCreature {};
 } // namespace Ui
 
 QT_END_NAMESPACE

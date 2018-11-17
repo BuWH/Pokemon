@@ -1,6 +1,8 @@
 //
 // Created by 温和 on 2018/10/1.
 //
+#include <include/basecreature.h>
+
 #include "/Users/wenhe/code/Pokemon/include/basecreature.h"
 
 BaseCreature::BaseCreature() {
@@ -24,7 +26,7 @@ void BaseCreature::addExp(int exp) {
 }
 
 float BaseCreature::randomGrow(float attribute) {
-    static std::default_random_engine e(unsigned((time(NULL)));
+    static std::default_random_engine e(unsigned((time(NULL))));
     static std::normal_distribution<float> n(0, 0.2);
     float temp = round(n(e) * 10) / 10;
     if (temp > 0)
@@ -62,4 +64,8 @@ void BaseCreature::initProperty() {
             break;
         }
     }
+}
+
+BaseCreature::~BaseCreature() {
+    //qDebug()<<"bye";
 }

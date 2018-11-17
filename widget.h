@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include "/Users/wenhe/code/Pokemon/include/user.h"
 #include "singlecreature/singlecreature.h"
+#include "fight/fight.h"
 
 namespace Ui {
     class Widget;
@@ -29,12 +30,13 @@ protected:
     void upgradeCreature();
     void generateCreature();
     void clearUser();
-
+    void fightTest();
 private:
     Ui::Widget *ui;
-    SingleCreature *test;
-    BaseCreature *currentCreature;
-    User *user;
+    SingleCreature *tempCreature = nullptr;
+    Fight *fight;
+    BaseCreature *currentCreature = nullptr;
+    User *user = nullptr;
     QVector<SingleCreature *> creatures;
 };
 
