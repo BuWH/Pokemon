@@ -17,11 +17,23 @@
 #include <QDebug>
 #include "const_define.h"
 
-class MySocket : public QTcpSocket
+class TcpServer;
+
+class TcpSocket : public QTcpSocket
 {
 Q_OBJECT
 public:
-    explicit MySocket(int socketDescriptor, QObject *parent = 0);
+    TcpSocket(int socketdesc, QTcpSocket *parent = NULL);
+
+    ~TcpSocket();
+
+private slots:
+
+    void ReadAndParseData();
+
+    void SocketErr(QAbstractSocket::SocketError socketError);
+private:
+    QString m_recvDataStr;
 
     void processRequest(QString str);
 
@@ -30,18 +42,6 @@ public:
     void signup(QString account, QString password);
 
     void login(QString account, QString password);
-
-signals:
-    void revData(QString, QByteArray);
-
-public slots:
-    void recvData();
-    void sendMsg(QByteArray msg, int id);
-
-private:
-
-    int socketDescriptor;
 };
-
 
 #endif //SERVER_MYSOCKET_H

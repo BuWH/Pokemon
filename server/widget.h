@@ -10,10 +10,10 @@
 #include <QFile>
 #include <QTextStream>
 #include <QByteArray>
+#include "myserver.h"
 
-namespace Ui {
-    class Widget;
-}
+class TcpServer;
+
 
 class Widget : public QWidget {
 Q_OBJECT
@@ -24,24 +24,7 @@ public:
     ~Widget();
 
 private:
-    Ui::Widget *ui;
-    QTcpServer *server;
-    QTcpSocket *clientConnection;
-
-    void processRequest(QString str);
-
-    int accountExist(QString str);
-
-    void signup(QString account, QString password);
-
-    void login(QString account, QString password);
-
-private slots:
-
-    void acceptConnection();
-
-    void readClient();
-
+    TcpServer *server;
 };
 
 #endif // WIDGET_H

@@ -9,21 +9,28 @@
 #include <QDebug>
 #include <QString>
 #include <QThread>
-#include "socketThread.h"
+#include <QList>
 #include "widget.h"
+#include "mysocket.h"
 
-class Widget;
+class TcpSocket;
 
-class MyServer: public QTcpServer{
-    Q_OBJECT
+class TcpServer : public QTcpServer {
+Q_OBJECT
 public:
-    explicit MyServer(QObject *parent = 0);
+    TcpServer(const std::string &ip, int port, QTcpServer *parent = NULL);
+
+    ~TcpServer();
 
 protected:
-    virtual void incomingConnection(int socketDescriptor);
+    void incomingConnection(qintptr socketDescriptor);
+
+private slots:
+
+    void SocketDisconn();
 
 private:
-    Widget *widget;
+    QList<TcpSocket *> m_socketList;
 };
 
 
