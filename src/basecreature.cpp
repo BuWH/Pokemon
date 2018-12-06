@@ -69,3 +69,18 @@ void BaseCreature::initProperty() {
 BaseCreature::~BaseCreature() {
     //qDebug()<<"bye";
 }
+
+QString BaseCreature::generateData() const {
+    QString data = "";
+    data += (QString::number(id) + ',');
+    data += (name + ',');
+    data += (QString::number(type) + ',');
+    data += (QString::number(property) + ',');
+    data += (QString::number(level) + ',');
+    data += (QString::number(exp) + ',');
+    data += (QString::number(strength) + ',');
+    data += (QString::number(defense) + ',');
+    data += (QString::number(hp) + ',');
+    data += (QString::number(speed));
+    return QString();
+}

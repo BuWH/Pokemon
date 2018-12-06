@@ -4,6 +4,8 @@
 #include "/Users/wenhe/code/Pokemon/include/user.h"
 #include <random>
 #include <ctime>
+#include <include/user.h>
+
 
 User::User(QString name) {
     this->id = user_id;
@@ -63,4 +65,17 @@ BaseCreature *User::getCreature(int i) const {
     } else {
         return creatures[i];
     }
+}
+
+QString User::generateData() const {
+    QString data = "";
+    data += (QString::number(id) + ',');
+    data += (name + ',');
+    data += (QString::number(winFights) + ',');
+    data += (QString::number(totalFights) + ',');
+    data += (QString::number(creatures.size()));
+    for (auto creature : creatures) {
+        data += (',' + creature->generateData());
+    }
+    return data;
 }

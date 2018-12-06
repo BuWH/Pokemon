@@ -48,11 +48,13 @@ void TcpSocket::processRequest(QString str) {
         this->signup(account, password);
     }
     if (temp == "logout") {
-        qDebug() << 'logout';
+        QString account = str.section(',', 1, 1);
+        this->logout(account);
     }
 }
 
 void TcpSocket::signup(QString account, QString password) {
+    /*
     QFile database("accounts.txt");
     if (!database.open(QFile::WriteOnly | QFile::Text | QFile::Append)) {
         qDebug() << "database open error";
@@ -71,6 +73,42 @@ void TcpSocket::signup(QString account, QString password) {
         qDebug() << "account exists";
         this->write("signup denied");
         this->waitForBytesWritten();
+    }*/
+    if (!login_db.open()) {
+        qDebug() << "database open error";
+    } else {
+        QSqlQuery qry(login_db);
+        /*
+        qry.prepare( "DROP TABLE account" );
+        if( !qry.exec() )
+            qDebug() << qry.lastError();
+        else
+            qDebug() << "Table deleted!";
+        */
+        //创建table
+        qry.prepare("SELECT name FROM account WHERE name = ?");
+        qry.bindValue(0, "\'" + account + "\'");
+        if (!qry.exec()) {
+            qDebug() << qry.lastError();
+        } else {
+            if (qry.next()) {
+                QString name = qry.value(0).toString();
+                qDebug() << "account: " << name << "exists!";
+            } else {
+                qry.prepare("INSERT INTO account (id, name, password) VALUES (NULL, ? , ?)");
+                qry.bindValue(0, "\'" + account + "\'");
+                qry.bindValue(1, "\'" + password + "\'");
+                if (!qry.exec()) {
+                    qDebug() << "sign up error: " << account + " " + password;
+                    this->write("signup,denied");
+                    this->waitForBytesWritten();
+                } else {
+                    qDebug() << "sign up: " << account + " " + password;
+                    this->write("signup,success");
+                    this->waitForBytesWritten();
+                }
+            }
+        }
     }
 }
 
@@ -118,8 +156,6 @@ void TcpSocket::login(QString account, QString password) {
                 "CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE, password VARCHAR(30), status INT default 0)");
         if (!qry.exec())
             qDebug() << qry.lastError();
-        else
-            qDebug() << "Table created!";
 
         qry.prepare("SELECT name,password,status FROM account WHERE name = ?");
         qry.bindValue(0, "\'" + account + "\'");
@@ -130,45 +166,70 @@ void TcpSocket::login(QString account, QString password) {
                 QString name = qry.value(0).toString();
                 QString db_password = qry.value(1).toString();
                 bool status = qry.value(2).toBool();
-                qDebug() << name << db_password;
+                if (db_password != ("\'" + password + "\'")) {
+                    qDebug() << "wrong password! " << name << db_password;
+                    this->write("login,denied");
+                    this->waitForBytesWritten();
+                } else {
+                    if (status) {
+                        qDebug() << "already online! " << name << password;
+                    } else {
+                        qry.prepare("UPDATE account SET status = 1 WHERE name = ?");
+                        qry.bindValue(0, "\'" + account + "\'");
+                        if (!qry.exec()) {
+                            qDebug() << "login failed: " << name;
+                            this->write("login,failed");
+                            this->waitForBytesWritten();
+                        } else {
+                            qDebug() << "send: login permitted";
+                            this->write("login,success");
+                            this->waitForBytesWritten();
+                        }
+                    }
+                }
             } else {
                 qDebug() << "no data";
             }
 
         }
     }
+    //login_db.close();
 }
 
-int TcpSocket::accountExist(QString str) {
-    /*
-    QFile database("accounts.txt");
-    if (!database.open(QFile::ReadOnly | QFile::Text)) {
-        qDebug() << "database open error";
-        return ERROR;
-    }
-    QTextStream data(&database);
-    QString temp;
-    while (!data.atEnd()) {
-        temp = data.readLine();
-        temp = temp.trimmed().section(',', 0, 0);
-        if (temp == str)
-            return TRUE;
-    }
-    database.close();
-    return FALSE;
-     */
+void TcpSocket::logout(QString account) {
     if (!login_db.open()) {
         qDebug() << "database open error";
     } else {
         QSqlQuery qry(login_db);
-
-        qry.prepare("SELECT name FROM account WHERE name = ?");
-        qry.bindValue(0, "\'" + str + "\'");
+        qry.prepare("SELECT name,password,status FROM account WHERE name = ?");
+        qry.bindValue(0, "\'" + account + "\'");
         if (!qry.exec()) {
             qDebug() << qry.lastError();
+            this->write("logout,failed");
+            this->waitForBytesWritten();
         } else {
-            QString name = qry.value(0).toString();
-            qDebug() << name;
+            if (qry.next()) {
+                QString name = qry.value(0).toString();
+                bool status = qry.value(2).toBool();
+                if (!status) {
+                    qDebug() << "already online! " << name;
+                } else {
+                    qry.prepare("UPDATE account SET status = 0 WHERE name = ?");
+                    qry.bindValue(0, "\'" + account + "\'");
+                    if (!qry.exec()) {
+                        qDebug() << "logoff failed: " << name;
+                        this->write("logoff,failed");
+                        this->waitForBytesWritten();
+                    } else {
+                        qDebug() << "send: logoff permitted";
+                        this->write("logoff,success");
+                        this->waitForBytesWritten();
+                    }
+                }
+
+            } else {
+                qDebug() << "no account";
+            }
         }
     }
 }

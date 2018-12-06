@@ -43,11 +43,11 @@ private:
 
     void processRequest(QString str);
 
-    int accountExist(QString str);
-
     void signup(QString account, QString password);
 
     void login(QString account, QString password);
+
+    void logout(QString account);
 
 };
 

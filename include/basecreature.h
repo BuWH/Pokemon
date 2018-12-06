@@ -69,6 +69,7 @@ public:
 
     virtual void upgrade();
 
+    QString generateData() const;
 protected:
     void setType(Type type) { this->type = type; };
     void setHp(int hp) { this->hp = hp; };
@@ -85,9 +86,9 @@ protected:
     virtual void initAbility();
 
 private:
+    QString name;
     Type type;
     Property property;
-    QString name;
     int level;
     int exp;
     unsigned int id;

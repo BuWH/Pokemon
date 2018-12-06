@@ -26,6 +26,8 @@ public:
     float getWinRate() const { return float(winFights / totalFights); };
     unsigned int getId() const { return this->id; };
 
+    QString generateData() const;
+
 public slots:
     void addCreature();
     void addCreature(BaseCreature *&creature);

@@ -25,10 +25,6 @@ TcpServer::~TcpServer() {
     m_socketList.clear();
 }
 
-/*
-Note: If you want to handle an incoming connection as a new QTcpSocket object in another thread you have to
-pass the socketDescriptor to the other thread and create the QTcpSocket object there and use its setSocketDescriptor() method.
-*/
 void TcpServer::incomingConnection(qintptr socketDescriptor) {
     TcpSocket *socket = new TcpSocket(socketDescriptor);
     qDebug() << "new connection: " << socket->peerAddress().toString() << socket->peerPort();
