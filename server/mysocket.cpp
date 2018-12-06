@@ -10,12 +10,14 @@
 
 TcpSocket::TcpSocket(int sock, QTcpSocket *parent) : QTcpSocket(parent) {
     this->setSocketDescriptor(sock);
+    login_db = QSqlDatabase::addDatabase("QSQLITE", QString::number(sock));
+    login_db.setDatabaseName("accounts.db");
     connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(SocketErr(QAbstractSocket::SocketError)));
 }
 
 TcpSocket::~TcpSocket()
 {
-
+    login_db.close();
 }
 
 void TcpSocket::ReadAndParseData() {
@@ -73,6 +75,7 @@ void TcpSocket::signup(QString account, QString password) {
 }
 
 void TcpSocket::login(QString account, QString password) {
+    /*
     QFile database("accounts.txt");
     if (!database.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "send: database open error";
@@ -98,9 +101,46 @@ void TcpSocket::login(QString account, QString password) {
     this->write("login denied");
     this->waitForBytesWritten();
     database.close();
+    */
+    if (!login_db.open()) {
+        qDebug() << "database open error";
+    } else {
+        QSqlQuery qry(login_db);
+        /*
+        qry.prepare( "DROP TABLE account" );
+        if( !qry.exec() )
+            qDebug() << qry.lastError();
+        else
+            qDebug() << "Table deleted!";
+        */
+        //创建table
+        qry.prepare(
+                "CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE, password VARCHAR(30), status INT default 0)");
+        if (!qry.exec())
+            qDebug() << qry.lastError();
+        else
+            qDebug() << "Table created!";
+
+        qry.prepare("SELECT name,password,status FROM account WHERE name = ?");
+        qry.bindValue(0, "\'" + account + "\'");
+        if (!qry.exec()) {
+            qDebug() << qry.lastError();
+        } else {
+            if (qry.next()) {
+                QString name = qry.value(0).toString();
+                QString db_password = qry.value(1).toString();
+                bool status = qry.value(2).toBool();
+                qDebug() << name << db_password;
+            } else {
+                qDebug() << "no data";
+            }
+
+        }
+    }
 }
 
 int TcpSocket::accountExist(QString str) {
+    /*
     QFile database("accounts.txt");
     if (!database.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "database open error";
@@ -116,4 +156,19 @@ int TcpSocket::accountExist(QString str) {
     }
     database.close();
     return FALSE;
+     */
+    if (!login_db.open()) {
+        qDebug() << "database open error";
+    } else {
+        QSqlQuery qry(login_db);
+
+        qry.prepare("SELECT name FROM account WHERE name = ?");
+        qry.bindValue(0, "\'" + str + "\'");
+        if (!qry.exec()) {
+            qDebug() << qry.lastError();
+        } else {
+            QString name = qry.value(0).toString();
+            qDebug() << name;
+        }
+    }
 }

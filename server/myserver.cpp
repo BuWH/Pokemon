@@ -31,7 +31,7 @@ pass the socketDescriptor to the other thread and create the QTcpSocket object t
 */
 void TcpServer::incomingConnection(qintptr socketDescriptor) {
     TcpSocket *socket = new TcpSocket(socketDescriptor);
-    qDebug() << "new connection: " << socket->peerAddress().toString() << " " << socket->peerPort();
+    qDebug() << "new connection: " << socket->peerAddress().toString() << socket->peerPort();
 
     connect(socket, SIGNAL(readyRead()), socket, SLOT(ReadAndParseData())); // 会移进线程里
     connect(socket, SIGNAL(disconnected()), this, SLOT(SocketDisconn()));
@@ -51,4 +51,6 @@ void TcpServer::SocketDisconn() {
         delete socket;
         socket = NULL;
     }
+    qDebug() << "connection closed";
+    qDebug() << "current connection: " << m_socketList.size();
 }

@@ -14,6 +14,10 @@
 #include <QFile>
 #include <QTextStream>
 #include <QByteArray>
+#include <QSql>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QDebug>
 #include "const_define.h"
 
@@ -28,12 +32,14 @@ public:
     ~TcpSocket();
 
 private slots:
-
     void ReadAndParseData();
 
     void SocketErr(QAbstractSocket::SocketError socketError);
+
 private:
     QString m_recvDataStr;
+
+    QSqlDatabase login_db;
 
     void processRequest(QString str);
 
@@ -42,6 +48,7 @@ private:
     void signup(QString account, QString password);
 
     void login(QString account, QString password);
+
 };
 
 #endif //SERVER_MYSOCKET_H
