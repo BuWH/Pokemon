@@ -53,6 +53,10 @@ private:
 
     void updateCreature(QString data);
 
+    void getUserData(QString account);
+
+    void getCreaetureData(QString master);
+
 };
 
 #endif //SERVER_MYSOCKET_H

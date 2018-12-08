@@ -77,7 +77,7 @@ QString User::generateData() const {
     data.append(QString::number(totalFights) + ',');
     data.append(QString::number(creatures.size()));
     for (auto creature : creatures) {
-        data.append(',' + creature->generateData());
+        data.append(',' + creature->generateData() + ',' + name);
     }
     return data;
 }

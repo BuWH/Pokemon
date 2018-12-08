@@ -22,8 +22,8 @@
   <property name="windowTitle">
    <string>Pokemon Test</string>
   </property>
-     <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
          <number>2</number>
@@ -393,6 +393,7 @@
       <attribute name="title">
           <string>Tab 3</string>
       </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_4"/>
      </widget>
     </widget>
    </item>
