@@ -39,7 +39,7 @@ private slots:
 private:
     QString m_recvDataStr;
 
-    QSqlDatabase login_db;
+    QSqlDatabase account_db, creature_db;
 
     void processRequest(QString str);
 
@@ -48,6 +48,10 @@ private:
     void login(QString account, QString password);
 
     void logout(QString account);
+
+    void updateUserData(int id, QString account, int winfights, int totalfights, int num);
+
+    void updateCreature(QString data);
 
 };
 

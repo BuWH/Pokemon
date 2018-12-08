@@ -10,6 +10,8 @@
 User::User(QString name) {
     this->id = user_id;
     this->name = name;
+    winFights = 0;
+    totalFights = 0;
 }
 
 User::~User() {
@@ -69,13 +71,13 @@ BaseCreature *User::getCreature(int i) const {
 
 QString User::generateData() const {
     QString data = "";
-    data += (QString::number(id) + ',');
-    data += (name + ',');
-    data += (QString::number(winFights) + ',');
-    data += (QString::number(totalFights) + ',');
-    data += (QString::number(creatures.size()));
+    data.append(QString::number(id) + ',');
+    data.append(name + ',');
+    data.append(QString::number(winFights) + ',');
+    data.append(QString::number(totalFights) + ',');
+    data.append(QString::number(creatures.size()));
     for (auto creature : creatures) {
-        data += (',' + creature->generateData());
+        data.append(',' + creature->generateData());
     }
     return data;
 }

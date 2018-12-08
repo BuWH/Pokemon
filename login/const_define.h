@@ -12,7 +12,8 @@
 enum RequestType {
     login,
     signup,
-    logout
+    logout,
+    updateuser
 };
 
 #endif //SERVER_CONST_DEFINE_H

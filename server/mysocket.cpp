@@ -10,14 +10,15 @@
 
 TcpSocket::TcpSocket(int sock, QTcpSocket *parent) : QTcpSocket(parent) {
     this->setSocketDescriptor(sock);
-    login_db = QSqlDatabase::addDatabase("QSQLITE", QString::number(sock));
-    login_db.setDatabaseName("accounts.db");
+    account_db = QSqlDatabase::addDatabase("QSQLITE", QString::number(sock));
+    account_db.setDatabaseName("accounts.db");
+    creature_db = QSqlDatabase::addDatabase("QSQLITE", QString::number(sock) + "creature");
+    creature_db.setDatabaseName("creatures.db");
     connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(SocketErr(QAbstractSocket::SocketError)));
 }
 
-TcpSocket::~TcpSocket()
-{
-    login_db.close();
+TcpSocket::~TcpSocket() {
+    account_db.close();
 }
 
 void TcpSocket::ReadAndParseData() {
@@ -51,41 +52,34 @@ void TcpSocket::processRequest(QString str) {
         QString account = str.section(',', 1, 1);
         this->logout(account);
     }
+    if (temp == "updateuser") {
+        int id = str.section(',', 1, 1).toInt();
+        QString account = str.section(',', 2, 2);
+        int winfights = str.section(',', 3, 3).toInt();
+        int totalfights = str.section(',', 4, 4).toInt();
+        int num = str.section(',', 5, 5).toInt();
+        updateUserData(id, account, winfights, totalfights, num);
+    }
 }
 
 void TcpSocket::signup(QString account, QString password) {
-    /*
-    QFile database("accounts.txt");
-    if (!database.open(QFile::WriteOnly | QFile::Text | QFile::Append)) {
-        qDebug() << "database open error";
-        return;
-    }
-    if (this->accountExist(account) == FALSE) {
-        QTextStream data(&database);
-        data << account << "," << password << "\n";
-        qDebug() << "signup: " << account << " " << password;
-        database.close();
-        return;
-    } else if (this->accountExist(account) == ERROR) {
-        this->write("server error");
-        this->waitForBytesWritten();
-    } else {
-        qDebug() << "account exists";
-        this->write("signup denied");
-        this->waitForBytesWritten();
-    }*/
-    if (!login_db.open()) {
+
+    if (!account_db.open()) {
         qDebug() << "database open error";
     } else {
-        QSqlQuery qry(login_db);
-        /*
+        QSqlQuery qry(account_db);
+        ///*
         qry.prepare( "DROP TABLE account" );
         if( !qry.exec() )
             qDebug() << qry.lastError();
         else
             qDebug() << "Table deleted!";
-        */
+        //*/
         //创建table
+        qry.prepare("CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE"
+                    ", password VARCHAR(30), status INT DEFAULT 0, winfights INT DEFAULT 0, totalfights INT DEFAULT 0, num INT DEFAULT 0)");
+        if (!qry.exec())
+            qDebug() << qry.lastError();
         qry.prepare("SELECT name FROM account WHERE name = ?");
         qry.bindValue(0, "\'" + account + "\'");
         if (!qry.exec()) {
@@ -140,10 +134,10 @@ void TcpSocket::login(QString account, QString password) {
     this->waitForBytesWritten();
     database.close();
     */
-    if (!login_db.open()) {
+    if (!account_db.open()) {
         qDebug() << "database open error";
     } else {
-        QSqlQuery qry(login_db);
+        QSqlQuery qry(account_db);
         /*
         qry.prepare( "DROP TABLE account" );
         if( !qry.exec() )
@@ -152,8 +146,8 @@ void TcpSocket::login(QString account, QString password) {
             qDebug() << "Table deleted!";
         */
         //创建table
-        qry.prepare(
-                "CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE, password VARCHAR(30), status INT default 0)");
+        qry.prepare("CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE"
+                    ", password VARCHAR(30), status INT DEFAULT 0, winfights INT DEFAULT 0, totalfights INT DEFAULT 0, num INT DEFAULT 0)");
         if (!qry.exec())
             qDebug() << qry.lastError();
 
@@ -193,14 +187,14 @@ void TcpSocket::login(QString account, QString password) {
 
         }
     }
-    //login_db.close();
+    //account_db.close();
 }
 
 void TcpSocket::logout(QString account) {
-    if (!login_db.open()) {
+    if (!account_db.open()) {
         qDebug() << "database open error";
     } else {
-        QSqlQuery qry(login_db);
+        QSqlQuery qry(account_db);
         qry.prepare("SELECT name,password,status FROM account WHERE name = ?");
         qry.bindValue(0, "\'" + account + "\'");
         if (!qry.exec()) {
@@ -229,6 +223,106 @@ void TcpSocket::logout(QString account) {
 
             } else {
                 qDebug() << "no account";
+            }
+        }
+    }
+}
+
+void TcpSocket::updateUserData(int id, QString account, int winfights, int totalfights, int num) {
+    if (!account_db.open()) {
+        qDebug() << "database open error";
+    } else {
+        QSqlQuery qry(account_db);
+        qry.prepare("SELECT name,password,status,num FROM account WHERE name = ?");
+        qry.bindValue(0, "\'" + account + "\'");
+        if (!qry.exec()) {
+            qDebug() << qry.lastError();
+            this->write("error,no account");
+            this->waitForBytesWritten();
+        } else {
+            if (qry.next()) {
+                QString name = qry.value(0).toString();
+                bool status = qry.value(2).toBool();
+                if (!status) {
+                    qDebug() << "update user failed, not online" << name;
+                    this->write("update user,not online");
+                    this->waitForBytesWritten();
+                } else {
+                    qry.prepare("UPDATE account SET num = ?, winfights = ?, totalfights = ? WHERE name = ?");
+                    qry.bindValue(0, num);
+                    qry.bindValue(1, winfights);
+                    qry.bindValue(2, totalfights);
+                    qry.bindValue(3, "\'" + account + "\'");
+                    if (!qry.exec()) {
+                        qDebug() << "update user failed: " << name;
+                        this->write("update user,failed");
+                        this->waitForBytesWritten();
+                    } else {
+                        qDebug() << "send: update user success";
+                        this->write("update user,success");
+                        this->waitForBytesWritten();
+                    }
+                }
+
+            } else {
+                qDebug() << "update user failed no account";
+                this->write("update user,no account");
+                this->waitForBytesWritten();
+            }
+        }
+    }
+}
+
+void TcpSocket::updateCreature(QString data) {
+    if (!creature_db.open()) {
+        qDebug() << "creature data open error";
+        this->write("update creature,data open error");
+        this->waitForBytesWritten();
+    } else {
+        int id = data.section(',', 0, 0).toInt();
+        QString name = data.section(',', 1, 1);
+        int type = data.section(',', 2, 2).toInt();
+        int property = data.section(',', 2, 2).toInt();
+        int level = data.section(',', 3, 3).toInt();
+        int exp = data.section(',', 4, 4).toInt();
+        float strength = data.section(',', 5, 5).toFloat();
+        float defense = data.section(',', 6, 6).toFloat();
+        int hp = data.section(',', 7, 7).toInt();
+        float speed = data.section(',', 8, 8).toFloat();
+        QString master = data.section(',', 9, 9);
+        QSqlQuery qry(creature_db);
+        qry.prepare(
+                "CREATE TABLE IF NOT EXISTS creature (id INTEGER UNIQUE PRIMARY KEY, master VARCHAR(30), name VARCHAR(30), type INT"
+                ", property INT, level INT, exp INT, strength FLOAT, defense FLOAT, hp INT, speed FLOAT)");
+        if (!qry.exec()) {
+            qDebug() << "update creature error";
+            //this->write("update creature, error");
+            //this->waitForBytesWritten();
+        }
+        qry.prepare("SELECT id,master,name FROM creature WHERE id = ?");
+        if (!qry.exec()) {
+            qDebug() << "select creature error";
+        } else {
+            if (qry.next()) {
+                qDebug() << qry.value(0).toInt() << qry.value(1) << qry.value(2);
+                qry.prepare("UPDATE creature SET name = ?,master = ?,name = ?,type = ?,property = ?"
+                            "level = ?,exp = ?,strength = ?,defense = ?,hp = ?,speed = ? WHERE id = ?");
+                qry.bindValue(0, "\'" + name + "\'");
+                qry.bindValue(1, "\'" + master + "\'");
+                qry.bindValue(2, type);
+                qry.bindValue(3, property);
+                qry.bindValue(4, level);
+                qry.bindValue(5, exp);
+                qry.bindValue(6, strength);
+                qry.bindValue(7, defense);
+                qry.bindValue(8, hp);
+                qry.bindValue(9, speed);
+                qry.bindValue(10, id);
+                if (!qry.exec()) {
+                    qDebug() << "update creature error";
+                } else {
+                    qDebug() << "update creature success" << id << "name" << master;
+                }
             }
         }
     }

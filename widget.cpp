@@ -9,7 +9,11 @@ Widget::Widget(QWidget *parent)
     this->setFixedWidth(300);
     ui->fight->setDisabled(true);
     ui->upgrade->setDisabled(true);
+    login = new Login(ui->tab_3);
+    login->show();
     //ui->tab_1->setWindowIconText("Single");
+    connect(ui->sendUser, &QPushButton::clicked, this, &Widget::sendUser);
+    connect(ui->sendCreature, &QPushButton::clicked, this, &Widget::sendCreature);
     connect(ui->generate, &QPushButton::clicked, this, &Widget::generateCreature);
     connect(ui->upgrade, &QPushButton::clicked, this, &Widget::upgradeCreature);
     connect(ui->clear, &QPushButton::clicked, this, &Widget::clearUser);
@@ -46,6 +50,16 @@ void Widget::generateCreature() {
     creatures.append(tempCreature);
 
     refresh();
+}
+
+void Widget::sendUser() {
+    if (user) {
+        login->send(RequestType::updateuser, user->generateData());
+    }
+}
+
+void Widget::sendCreature() {
+    qDebug() << "send creature";
 }
 
 void Widget::clearUser() {

@@ -89,6 +89,19 @@ void Login::send(RequestType type, QString account, QString password) {
     }
 }
 
+void Login::send(RequestType type, QString str) {
+    if (type == RequestType::updateuser) {
+        QByteArray data(("updateuser," + str).toUtf8());
+        qDebug() << data;
+        client->write(data);
+        if (!client->waitForBytesWritten(1000)) {
+            qDebug() << "server error";
+        }
+        qDebug() << "update user data:" + str.section(',', 0, 1);
+        return;
+    }
+}
+
 void Login::acceptData() {
     QString readData = client->readAll();
     if (readData != "")

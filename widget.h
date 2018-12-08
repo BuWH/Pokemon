@@ -9,6 +9,7 @@
 #include "/Users/wenhe/code/Pokemon/include/user.h"
 #include "singlecreature/singlecreature.h"
 #include "fight/fight.h"
+#include "login/login.h"
 
 namespace Ui {
     class Widget;
@@ -31,9 +32,14 @@ protected:
     void generateCreature();
     void clearUser();
     void fightTest();
+
+    void sendUser();
+
+    void sendCreature();
 private:
     Ui::Widget *ui;
     SingleCreature *tempCreature = nullptr;
+    Login *login;
     Fight *fight;
     BaseCreature *currentCreature = nullptr;
     User *user = nullptr;

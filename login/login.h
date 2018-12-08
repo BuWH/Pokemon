@@ -21,6 +21,8 @@ public:
 
     ~Login();
 
+    void send(RequestType type, QString str);
+
 private:
     Ui::Login *ui;
     QTcpSocket *client;

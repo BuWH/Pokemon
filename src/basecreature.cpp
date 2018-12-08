@@ -72,15 +72,15 @@ BaseCreature::~BaseCreature() {
 
 QString BaseCreature::generateData() const {
     QString data = "";
-    data += (QString::number(id) + ',');
-    data += (name + ',');
-    data += (QString::number(type) + ',');
-    data += (QString::number(property) + ',');
-    data += (QString::number(level) + ',');
-    data += (QString::number(exp) + ',');
-    data += (QString::number(strength) + ',');
-    data += (QString::number(defense) + ',');
-    data += (QString::number(hp) + ',');
-    data += (QString::number(speed));
-    return QString();
+    data.append(QString::number(id) + ',');
+    data.append(name + ',');
+    data.append(QString::number(type) + ',');
+    data.append(QString::number(property) + ',');
+    data.append(QString::number(level) + ',');
+    data.append(QString::number(exp) + ',');
+    data.append(QString::number(strength) + ',');
+    data.append(QString::number(defense) + ',');
+    data.append(QString::number(hp) + ',');
+    data.append(QString::number(speed));
+    return data;
 }

@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -23,7 +24,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
     QTabWidget *tabWidget;
     QWidget *tab_1;
     QVBoxLayout *verticalLayout_2;
@@ -39,6 +40,8 @@ public:
     QLabel *strength;
     QLabel *defense;
     QLabel *speed;
+    QPushButton *sendUser;
+    QPushButton *sendCreature;
     QPushButton *fight;
     QPushButton *generate;
     QPushButton *upgrade;
@@ -49,7 +52,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QWidget *creatures_list;
     QVBoxLayout *creatures_list_layout;
-    QWidget *tab;
+    QWidget *tab_3;
 
     void setupUi(QWidget *Widget)
     {
@@ -62,10 +65,10 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Widget->sizePolicy().hasHeightForWidth());
         Widget->setSizePolicy(sizePolicy);
-        verticalLayout = new QVBoxLayout(Widget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout = new QGridLayout(Widget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         tabWidget = new QTabWidget(Widget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tab_1 = new QWidget();
@@ -164,11 +167,27 @@ public:
 
         verticalLayout_2->addWidget(speed);
 
-        fight = new QPushButton(tab_1);
-        fight->setObjectName(QStringLiteral("fight"));
+        sendUser = new QPushButton(tab_1);
+        sendUser->setObjectName(QStringLiteral("sendUser"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(sendUser->sizePolicy().hasHeightForWidth());
+        sendUser->setSizePolicy(sizePolicy2);
+        sendUser->setMinimumSize(QSize(0, 0));
+
+        verticalLayout_2->addWidget(sendUser);
+
+        sendCreature = new QPushButton(tab_1);
+        sendCreature->setObjectName(QStringLiteral("sendCreature"));
+        sizePolicy2.setHeightForWidth(sendCreature->sizePolicy().hasHeightForWidth());
+        sendCreature->setSizePolicy(sizePolicy2);
+        sendCreature->setMinimumSize(QSize(0, 0));
+
+        verticalLayout_2->addWidget(sendCreature);
+
+        fight = new QPushButton(tab_1);
+        fight->setObjectName(QStringLiteral("fight"));
         sizePolicy2.setHeightForWidth(fight->sizePolicy().hasHeightForWidth());
         fight->setSizePolicy(sizePolicy2);
         fight->setMinimumSize(QSize(0, 0));
@@ -237,16 +256,16 @@ public:
 
         scrollArea->setWidget(scrollAreaWidgetContents);
         tabWidget->addTab(tab_2, QString());
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        tabWidget->addTab(tab, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        tabWidget->addTab(tab_3, QString());
 
-        verticalLayout->addWidget(tabWidget);
+        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
 
         retranslateUi(Widget);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Widget);
@@ -270,13 +289,15 @@ public:
         strength->setText(QApplication::translate("Widget", "\345\212\233:", nullptr));
         defense->setText(QApplication::translate("Widget", "\351\230\262:", nullptr));
         speed->setText(QApplication::translate("Widget", "\351\200\237:", nullptr));
+        sendUser->setText(QApplication::translate("Widget", "send User", nullptr));
+        sendCreature->setText(QApplication::translate("Widget", "send Creature", nullptr));
         fight->setText(QApplication::translate("Widget", "fight test", nullptr));
         generate->setText(QApplication::translate("Widget", "\345\257\273\346\211\276", nullptr));
         upgrade->setText(QApplication::translate("Widget", "\345\215\207\347\272\247", nullptr));
         clear->setText(QApplication::translate("Widget", "\346\270\205\347\251\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QApplication::translate("Widget", "Tab 1", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Widget", "Tab 2", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Widget", "\351\241\265", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("Widget", "Tab 3", nullptr));
     } // retranslateUi
 
 };
