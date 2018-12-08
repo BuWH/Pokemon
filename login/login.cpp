@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "login.h"
 #include "ui_login.h"
 
@@ -9,6 +10,7 @@ Login::Login(QWidget *parent) :
     this->connectedToServer();
     connect(ui->login, &QPushButton::clicked, this, &Login::loginRequest);
     connect(ui->signup, &QPushButton::clicked, this, &Login::signupRequest);
+    connect(ui->logout, &QPushButton::clicked, this, &Login::logoutRequest);
     //connect(ui->passwordInput, &QLineEdit::editingFinished, this, &Login::login );
 }
 
@@ -56,6 +58,14 @@ void Login::signupRequest() {
     }
 }
 
+void Login::logoutRequest() {
+    if (ui->accountInput->text() != "") {
+        if (this->connectedToServer()) {
+            this->send(RequestType::logout, ui->accountInput->text());
+        }
+    }
+}
+
 void Login::send(RequestType type, QString account, QString password) {
     if (type == RequestType::login) {
         QByteArray data(("login," + account + "," + password).toUtf8());
@@ -77,16 +87,6 @@ void Login::send(RequestType type, QString account, QString password) {
         qDebug() << "ask for signup permission: " << account + "," + password;
         return;
     }
-    if (type == RequestType::logout) {
-        QByteArray data(("logout," + account).toUtf8());
-        client->write(data);
-        if (!client->waitForBytesWritten(1000)) {
-            qDebug() << "server error";
-            return;
-        }
-        qDebug() << "ask for logout permission: " << account + "," + password;
-        return;
-    }
 }
 
 void Login::send(RequestType type, QString str) {
@@ -100,10 +100,43 @@ void Login::send(RequestType type, QString str) {
         qDebug() << "update user data:" + str.section(',', 0, 1);
         return;
     }
+    if (type == RequestType::logout) {
+        QByteArray data(("logout," + str).toUtf8());
+        client->write(data);
+        if (!client->waitForBytesWritten(1000)) {
+            qDebug() << "server error";
+            return;
+        }
+        qDebug() << "ask for logout permission: " << str;
+        return;
+    }
 }
 
 void Login::acceptData() {
     QString readData = client->readAll();
-    if (readData != "")
-        qDebug() << "get : " << readData;
+    QString str = readData.section(',', 0, 0);
+    if (str == "login") {
+        if (readData.section(',', 1, 1) == "success") {
+            qDebug() << "login success";
+        } else {
+            QMessageBox::information(this, "info", readData.section(',', 1, 1));
+        }
+    }
+    if (str == "logout") {
+        if (readData.section(',', 1, 1) == "success") {
+            qDebug() << "logout success";
+        } else {
+            QMessageBox::information(this, "info", readData.section(',', 1, 1));
+        }
+    }
+    if (str == "update creature") {
+        if (readData.section(',', 1, 1) == "success") {
+            qDebug() << "upload success";
+        } else {
+            QMessageBox::information(this, "info", readData.section(',', 1, 1));
+        }
+    }
+    if (str == "download") {
+        qDebug() << readData;
+    }
 }

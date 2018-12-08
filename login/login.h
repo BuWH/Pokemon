@@ -31,6 +31,8 @@ private:
 
     void signupRequest();
 
+    void logoutRequest();
+
     void send(RequestType type, QString account, QString password);
 
     bool connectedToServer();

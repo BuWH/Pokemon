@@ -53,9 +53,9 @@ private:
 
     void updateCreature(QString data);
 
-    void getUserData(QString account);
+    void sendUserData(QString account);
 
-    void getCreaetureData(QString master);
+    QString getCreaetureData(QString master);
 
 };
 

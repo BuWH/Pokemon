@@ -77,6 +77,19 @@
                 <string>注册</string>
             </property>
         </widget>
+        <widget class="QPushButton" name="logout">
+            <property name="geometry">
+                <rect>
+                    <x>45</x>
+                    <y>520</y>
+                    <width>180</width>
+                    <height>50</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>登出</string>
+            </property>
+        </widget>
     </widget>
     <layoutdefault spacing="6" margin="11"/>
     <resources/>

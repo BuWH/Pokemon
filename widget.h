@@ -32,9 +32,7 @@ protected:
     void generateCreature();
     void clearUser();
     void fightTest();
-
     void sendUser();
-
     void sendCreature();
 private:
     Ui::Widget *ui;

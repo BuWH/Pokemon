@@ -26,7 +26,7 @@
          <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
      </property>
      <widget class="QWidget" name="tab_1">
       <property name="sizePolicy">
@@ -201,6 +201,9 @@
          </property>
         </widget>
        </item>
+          <item>
+              <widget class="QLineEdit" name="user_name_2"/>
+          </item>
           <item>
               <widget class="QPushButton" name="sendUser">
                   <property name="sizePolicy">

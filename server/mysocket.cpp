@@ -15,10 +15,29 @@ TcpSocket::TcpSocket(int sock, QTcpSocket *parent) : QTcpSocket(parent) {
     creature_db = QSqlDatabase::addDatabase("QSQLITE", QString::number(sock) + "creature");
     creature_db.setDatabaseName("creatures.db");
     connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(SocketErr(QAbstractSocket::SocketError)));
+    ///*
+    QSqlQuery qry_(creature_db);
+    if (creature_db.open()) {
+        qry_.prepare("DROP TABLE creature");
+        if (!qry_.exec())
+            qDebug() << qry_.lastError();
+    }
+    //*/
 }
 
 TcpSocket::~TcpSocket() {
+    /*
+    QSqlQuery qry(account_db), qry_(creature_db);
+    qry.prepare( "DROP TABLE account" );
+    if( !qry.exec() )
+        qDebug() << qry.lastError();
+    qry_.prepare("DROP TABLE creature");
+    if( !qry_.exec() )
+        qDebug() << qry_.lastError();
+        */
     account_db.close();
+    creature_db.close();
+
 }
 
 void TcpSocket::ReadAndParseData() {
@@ -59,6 +78,12 @@ void TcpSocket::processRequest(QString str) {
         int totalfights = str.section(',', 4, 4).toInt();
         int num = str.section(',', 5, 5).toInt();
         updateUserData(id, account, winfights, totalfights, num);
+        /*
+        QSqlQuery qry(creature_db);
+        qry.prepare( "DROP TABLE creature" );
+        if( !qry.exec() )
+            qDebug() << qry.lastError();
+        */
         for (int i = 0; i < num; ++i) {
             updateCreature(str.section(',', 6 + i * 11, 16 + i * 11));
         }
@@ -71,11 +96,11 @@ void TcpSocket::signup(QString account, QString password) {
         qDebug() << "database open error";
     } else {
         QSqlQuery qry(account_db);
-        ///*
+
         qry.prepare( "DROP TABLE account" );
         if( !qry.exec() )
             qDebug() << qry.lastError();
-        //*/
+
         //创建table
         qry.prepare("CREATE TABLE IF NOT EXISTS account (id INTEGER UNIQUE PRIMARY KEY, name VARCHAR(30) UNIQUE"
                     ", password VARCHAR(30), status INT DEFAULT 0, winfights INT DEFAULT 0, totalfights INT DEFAULT 0, num INT DEFAULT 0)");
@@ -153,11 +178,14 @@ void TcpSocket::login(QString account, QString password) {
                             //qDebug() << "send: login permitted";
                             this->write("login,success");
                             this->waitForBytesWritten();
+                            sendUserData(account);
                         }
                     }
                 }
             } else {
                 qDebug() << "no data";
+                this->write("login,no account");
+                this->waitForBytesWritten();
             }
 
         }
@@ -174,24 +202,24 @@ void TcpSocket::logout(QString account) {
         qry.bindValue(0, "\'" + account + "\'");
         if (!qry.exec()) {
             qDebug() << qry.lastError();
-            this->write("logout,failed");
+            this->write("logout,no account");
             this->waitForBytesWritten();
         } else {
             if (qry.next()) {
                 QString name = qry.value(0).toString();
                 bool status = qry.value(2).toBool();
                 if (!status) {
-                    qDebug() << "already online! " << name;
+                    qDebug() << "already offline! " << name;
                 } else {
                     qry.prepare("UPDATE account SET status = 0 WHERE name = ?");
                     qry.bindValue(0, "\'" + account + "\'");
                     if (!qry.exec()) {
-                        qDebug() << "logoff failed: " << name;
-                        this->write("logoff,failed");
+                        qDebug() << "logout failed: " << name;
+                        this->write("logout,failed");
                         this->waitForBytesWritten();
                     } else {
-                        qDebug() << "send: logoff permitted";
-                        this->write("logoff,success");
+                        qDebug() << "logout permitted";
+                        this->write("logout,success");
                         this->waitForBytesWritten();
                     }
                 }
@@ -298,7 +326,7 @@ void TcpSocket::updateCreature(QString data) {
                     this->write("update creature,server error");
                     this->waitForBytesWritten();
                 } else {
-                    //qDebug() << "update creature success";
+                    qDebug() << "update creature success";
                 }
             } else {
                 qry.prepare("INSERT INTO creature (name,master,type,property,level,exp,strength,defense,hp,speed,id)"
@@ -319,14 +347,14 @@ void TcpSocket::updateCreature(QString data) {
                     this->write("update creature,server error");
                     this->waitForBytesWritten();
                 } else {
-                    //qDebug() << "insert creature success";
+                    qDebug() << "insert creature success" << master;
                 }
             }
         }
     }
 }
 
-void TcpSocket::getUserData(QString account) {
+void TcpSocket::sendUserData(QString account) {
     if (!account_db.open()) {
         qDebug() << "database open error";
     } else {
@@ -344,13 +372,16 @@ void TcpSocket::getUserData(QString account) {
                 int winfights = qry.value(2).toInt();
                 int totalfights = qry.value(3).toInt();
                 int num = qry.value(4).toInt();
-                QString data = "";
+                QString data = "download,";
                 data.append(QString::number(id) + ',');
                 data.append(name + ',');
                 data.append(QString::number(winfights) + ',');
                 data.append(QString::number(totalfights) + ',');
                 data.append(QString::number(num));
-
+                data.append(getCreaetureData(name));
+                qDebug() << data;
+                this->write(data.toUtf8());
+                this->waitForBytesWritten();
             } else {
                 qDebug() << "update user failed no account";
                 this->write("update user,no account");
@@ -360,6 +391,28 @@ void TcpSocket::getUserData(QString account) {
     }
 }
 
-void TcpSocket::getCreaetureData(QString) {
-
+QString TcpSocket::getCreaetureData(QString master) {
+    if (!creature_db.open()) {
+        qDebug() << "creature data open error";
+        this->write("login,creature data open error");
+        this->waitForBytesWritten();
+        return "";
+    } else {
+        QSqlQuery qry(creature_db);
+        qry.prepare("SELECT id,name,type,property,level,exp,strength,defense,hp,speed FROM creature WHERE master = ?");
+        qry.bindValue(0, master);
+        if (!qry.exec()) {
+            qDebug() << "select creature error";
+            return "";
+        } else {
+            QString data = "";
+            while (qry.next()) {
+                for (int i = 0; i < 10; ++i) {
+                    data.append(',' + qry.value(i).toString());
+                }
+            }
+            //qDebug() << data;
+            return data;
+        }
+    }
 }

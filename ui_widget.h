@@ -11,8 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTabWidget>
@@ -24,7 +24,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
     QWidget *tab_1;
     QVBoxLayout *verticalLayout_2;
@@ -40,6 +40,7 @@ public:
     QLabel *strength;
     QLabel *defense;
     QLabel *speed;
+    QLineEdit *user_name_2;
     QPushButton *sendUser;
     QPushButton *sendCreature;
     QPushButton *fight;
@@ -53,6 +54,7 @@ public:
     QWidget *creatures_list;
     QVBoxLayout *creatures_list_layout;
     QWidget *tab_3;
+    QVBoxLayout *verticalLayout_4;
 
     void setupUi(QWidget *Widget)
     {
@@ -65,10 +67,10 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Widget->sizePolicy().hasHeightForWidth());
         Widget->setSizePolicy(sizePolicy);
-        gridLayout = new QGridLayout(Widget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        verticalLayout = new QVBoxLayout(Widget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabWidget = new QTabWidget(Widget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tab_1 = new QWidget();
@@ -167,6 +169,11 @@ public:
 
         verticalLayout_2->addWidget(speed);
 
+        user_name_2 = new QLineEdit(tab_1);
+        user_name_2->setObjectName(QStringLiteral("user_name_2"));
+
+        verticalLayout_2->addWidget(user_name_2);
+
         sendUser = new QPushButton(tab_1);
         sendUser->setObjectName(QStringLiteral("sendUser"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -258,14 +265,18 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
+        verticalLayout_4 = new QVBoxLayout(tab_3);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         tabWidget->addTab(tab_3, QString());
 
-        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
+        verticalLayout->addWidget(tabWidget);
 
 
         retranslateUi(Widget);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Widget);

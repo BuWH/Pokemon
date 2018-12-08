@@ -40,7 +40,7 @@ void Widget::upgradeCreature() {
 
 void Widget::generateCreature() {
     if (user == nullptr) {
-        user = new User("wenhe");
+        user = new User(ui->user_name_2->text());
     }
     user->addCreature();
     currentCreature = user->getCreature(user->getCreaturesNum() - 1);
@@ -68,6 +68,7 @@ void Widget::clearUser() {
             ui->creatures_list_layout->removeWidget(creature);
         }
         creatures.clear();
+        ui->user_name_2->clear();
         delete user;
         user = nullptr;
         refresh();
